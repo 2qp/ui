@@ -3,5 +3,14 @@
     {
       "mode": "auto"
     }
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  //
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "ngClass",
+    ".*Styles",
+    ".*ClassName"
   ]
 }
