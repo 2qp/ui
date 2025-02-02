@@ -4,7 +4,7 @@
     //"outDir": "dist"
     "baseUrl": ".",
     "paths": {
-      "@repo/shadcn-ui/*": ["./src/*"]
+      "@repo/shadcn-ui-extended/*": ["./src/*"]
     }
   },
   "include": ["."],
