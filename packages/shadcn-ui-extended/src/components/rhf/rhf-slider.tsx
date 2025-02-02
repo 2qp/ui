@@ -35,9 +35,9 @@ type RHFSliderProps<T extends FieldValues> = {
 
   config?: SliderProps;
 
-  type?: "commit" | "change";
-
   styles?: RHFSliderStyles;
+
+  onValueCommit?: (value: number[]) => void;
 };
 
 type RHFSliderType = <T extends FieldValues>(
@@ -51,8 +51,8 @@ const RHFSlider: RHFSliderType = ({
   label,
   styles,
   config,
+  onValueCommit,
   readOnly = false,
-  type = "commit",
 }) => {
   return (
     <FormField
@@ -84,15 +84,10 @@ const RHFSlider: RHFSliderType = ({
               onValueChange={(v) => {
                 //
                 // if (type !== "change") return;
-
                 field.onChange(v);
               }}
-              onValueCommit={(v) => {
-                //
-                if (type !== "commit") return;
-
-                field.onChange(v);
-              }}
+              //
+              onValueCommit={onValueCommit}
             />
 
             {/*  */}
