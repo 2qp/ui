@@ -28,6 +28,7 @@ type RHFSliderProps<T extends FieldValues> = {
   name: Path<T>;
   control: Control<T>;
 
+  disabled?: boolean;
   readOnly?: boolean;
 
   label?: string;
@@ -52,6 +53,7 @@ const RHFSlider: RHFSliderType = ({
   styles,
   config,
   onValueCommit,
+  disabled = false,
   readOnly = false,
 }) => {
   return (
@@ -75,6 +77,7 @@ const RHFSlider: RHFSliderType = ({
               className={cn("w-[60%]", styles?.sliderClassName)}
               {...config}
               aria-readonly={readOnly}
+              disabled={disabled}
               //
               onChange={(e) => {
                 //
