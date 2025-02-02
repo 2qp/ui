@@ -12,6 +12,7 @@ import { cn } from "@repo/shadcn-ui/lib/utils";
 import type { HTMLInputTypeAttribute, JSX } from "react";
 import type { Control, FieldValues, Path } from "react-hook-form";
 
+// see .vscode tw attributes
 type RHFTextFieldStyles = {
   inputClassName?: string;
   labelClassName?: string;
@@ -38,13 +39,10 @@ type RHFTextFieldType = <T extends FieldValues>(
 const RHFTextField: RHFTextFieldType = ({
   control,
   name,
-
   label,
   placeholder,
   description,
-
   styles,
-
   type = "text",
 }) => {
   return (
@@ -55,7 +53,12 @@ const RHFTextField: RHFTextFieldType = ({
         <FormItem>
           <FormLabel className={cn(styles?.labelClassName)}>{label}</FormLabel>
           <FormControl>
-            <Input {...field} placeholder={placeholder} type={type} />
+            <Input
+              {...field}
+              placeholder={placeholder}
+              type={type}
+              className={cn(styles?.inputClassName)}
+            />
           </FormControl>
           <FormDescription className={cn(styles?.descriptionClassName)}>
             {description}
