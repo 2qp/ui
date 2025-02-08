@@ -5,7 +5,10 @@
     "baseUrl": ".",
     "paths": {
       "@repo/shadcn-ui/*": ["./src/*"]
-    }
+    },
+
+    "module": "ESNext",
+    "moduleResolution": "Bundler"
   },
   "include": ["."],
   "exclude": ["node_modules", "dist"]
