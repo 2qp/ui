@@ -10,6 +10,7 @@
     "@repo/shadcn-ui": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "i": "^0.3.7",
     "lucide-react": "^0.474.0",
     "next-themes": "^0.4.4",
@@ -31,6 +32,7 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.5.1",
     "react": "^19.0.0",
+    "react-day-picker": "8.10.1",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3"
   },
@@ -39,6 +41,7 @@
     "./postcss.config": "./postcss.config.mjs",
     "./tailwind.config": "./tailwind.config.ts",
     "./lib/*": "./src/lib/*.ts",
+    "./utils/*": "./src/utils/*.ts",
     "./components/*": "./src/components/*.tsx",
     "./hooks/*": "./src/hooks/*.ts"
   }
