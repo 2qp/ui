@@ -21,6 +21,7 @@ import {
   PopoverTrigger,
 } from "@repo/shadcn-ui/components/popover";
 import { cn } from "@repo/shadcn-ui/lib/utils";
+import clsx from "clsx";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import type { ComponentPropsWithoutRef, JSX, ReactNode } from "react";
@@ -89,7 +90,7 @@ const RHFComboBox: RHFComboBoxType = ({
               {label}
             </FormLabel>
             <Popover>
-              <PopoverTrigger asChild>
+              <PopoverTrigger ref={field.ref} asChild>
                 <FormControl>
                   <Button
                     variant="outline"
@@ -127,7 +128,7 @@ const RHFComboBox: RHFComboBoxType = ({
                           {...point}
                           value={point.value}
                           key={index}
-                          onSelect={(v) => {
+                          onSelect={() => {
                             //
                             if (!multi) {
                               field.onChange(point.value);
@@ -138,23 +139,23 @@ const RHFComboBox: RHFComboBoxType = ({
 
                             if (!field.value) {
                               //
-                              field.onChange([v]);
+                              field.onChange([point.value]);
                               return;
                             }
 
                             if (Array.isArray(field.value)) {
                               // const valueSet = new Set(field.value);
 
-                              if (valueSet.has(v)) {
+                              if (valueSet.has(point.value)) {
                                 //
                                 const set = new Set(valueSet);
-                                set.delete(v);
+                                set.delete(point.value);
 
                                 field.onChange([...set]);
                                 return;
                               }
 
-                              const set = new Set(valueSet).add(v);
+                              const set = new Set(valueSet).add(point.value);
                               field.onChange([...set]);
                               return;
                             }
@@ -167,12 +168,11 @@ const RHFComboBox: RHFComboBoxType = ({
 
                           <Check
                             key={index + "-check"}
-                            className={cn(
-                              "ml-auto",
-                              valueSet.has(point.value)
-                                ? "opacity-100"
-                                : "opacity-0"
-                            )}
+                            className={clsx("opacity-0 ml-auto", {
+                              "opacity-100":
+                                valueSet.has(point.value) ||
+                                field.value === point.value,
+                            })}
                           />
                         </CommandItem>
                       ))}
