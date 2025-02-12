@@ -14,7 +14,7 @@ import {
   PopoverTrigger,
 } from "@repo/shadcn-ui/components/popover";
 import { cn } from "@repo/shadcn-ui/lib/utils";
-import { format, getDate, isValid, parseISO } from "date-fns";
+import { format, getDate, isValid } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 
 import type { CalendarProps } from "@repo/shadcn-ui/components/calendar";
@@ -193,21 +193,18 @@ const Renderer: RendererType = ({ mode, field }) => {
 const formatMultipleDates = (dates: Date[]): string => {
   //
 
-  const grouped = dates.reduce(
-    (acc, date) => {
-      const parsedDate = typeof date === "string" ? parseISO(date) : date;
-      const monthYear = format(parsedDate, "yyy MMM");
+  const grouped = dates.reduce<Record<string, Set<number>>>((acc, date) => {
+    const parsedDate = date;
+    const monthYear = format(parsedDate, "yyy MMM");
 
-      if (!acc[monthYear]) {
-        acc[monthYear] = new Set<number>();
-      }
+    if (!acc[monthYear]) {
+      acc[monthYear] = new Set<number>();
+    }
 
-      acc[monthYear].add(getDate(parsedDate));
+    acc[monthYear].add(getDate(parsedDate));
 
-      return acc;
-    },
-    {} as Record<string, Set<number>>
-  );
+    return acc;
+  }, {});
 
   return Object.entries(grouped)
     .map(([monthYear, days]) => `${monthYear} : ${Array.from(days).join(", ")}`)
