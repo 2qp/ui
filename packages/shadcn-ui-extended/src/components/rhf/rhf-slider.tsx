@@ -14,7 +14,7 @@ import type { Control, FieldValues, Path } from "react-hook-form";
 
 type SliderProps = Omit<
   ComponentPropsWithoutRef<typeof Slider>,
-  "onValueChange" | "onValueCommit" | "form" | "defaultValue" | "value"
+  "onValueChange" | "onValueCommit" | "form" | "defaultValue" | "value" | "name"
 >;
 
 // see .vscode tw attributes
