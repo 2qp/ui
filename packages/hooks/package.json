@@ -1,0 +1,25 @@
+{
+  "name": "@repo/hooks",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "echo 'Add dev script here'",
+    "build": "echo 'Add build script here'",
+    "test": "echo 'Add test script here'",
+    "lint": "eslint . --max-warnings 0"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^22.13.4",
+    "@types/react": "^19.0.8",
+    "next": "^15.1.7",
+    "react": "^19.0.0",
+    "react-router-dom": "^7.1.5",
+    "typescript": "^5.7.3"
+  },
+  "exports": {
+    "./*": "./src/*.tsx"
+  }
+}
