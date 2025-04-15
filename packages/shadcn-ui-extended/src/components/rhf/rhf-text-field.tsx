@@ -9,7 +9,7 @@ import {
 import { Input } from "@repo/shadcn-ui/components/input";
 import { cn } from "@repo/shadcn-ui/lib/utils";
 
-import type { HTMLInputTypeAttribute, JSX } from "react";
+import type { ComponentProps, JSX } from "react";
 import type { Control, FieldValues, Path } from "react-hook-form";
 
 // see .vscode tw attributes
@@ -23,8 +23,7 @@ type RHFTextFieldProps<T extends FieldValues> = {
   control: Control<T>;
   name: Path<T>;
 
-  type?: HTMLInputTypeAttribute;
-
+  type?: ComponentProps<"input">["type"];
   label?: string;
   placeholder?: string;
   description?: string;
