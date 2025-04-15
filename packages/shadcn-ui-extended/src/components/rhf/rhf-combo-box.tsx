@@ -127,6 +127,7 @@ const RHFComboBox: RHFComboBoxType = ({
                         <CommandItem
                           {...point}
                           value={point.value}
+                          keywords={[point.label]}
                           key={index}
                           onSelect={() => {
                             //
