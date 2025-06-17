@@ -164,7 +164,7 @@ const RHFComboBox: RHFComboBoxType = ({
                             //
                           }}
                         >
-                          {point.leading}
+                          <div key={index + "-leading"}>{point.leading}</div>
                           <div key={index + "-value"}>{point.label}</div>
 
                           <Check
