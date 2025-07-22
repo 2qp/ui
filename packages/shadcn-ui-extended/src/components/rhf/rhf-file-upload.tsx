@@ -9,7 +9,7 @@ import {
 import { Input } from "@repo/shadcn-ui/components/input";
 import { cn } from "@repo/shadcn-ui/lib/utils";
 
-import type { JSX } from "react";
+import type { ComponentProps, JSX } from "react";
 import type { Control, FieldValues, Path } from "react-hook-form";
 
 type RHFFileUploadStyles = {
@@ -23,6 +23,7 @@ type RHFFileUploadProps<T extends FieldValues> = {
   name: Path<T>;
 
   type?: "single" | "multi";
+  accept?: ComponentProps<"input">["accept"];
 
   label?: string;
   placeholder?: string;
@@ -42,6 +43,7 @@ const RHFFileUpload: RHFFileUploadType = ({
   placeholder,
   description,
   styles,
+  accept,
   type = "single",
 }) => {
   //
@@ -63,6 +65,7 @@ const RHFFileUpload: RHFFileUploadType = ({
                 disabled={field.disabled}
                 name={field.name}
                 ref={field.ref}
+                accept={accept}
                 onChange={(e) => {
                   //
 

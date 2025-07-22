@@ -11,14 +11,16 @@ import { Input } from "@repo/shadcn-ui/components/input";
 import { cn } from "@repo/shadcn-ui/lib/utils";
 import clsx from "clsx";
 import { X } from "lucide-react";
+import { useRef } from "react";
 
-import type { JSX } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import type {
   Control,
   ControllerRenderProps,
   FieldValues,
   Path,
 } from "react-hook-form";
+import type { JSX } from "react/jsx-runtime";
 
 type RHFDropFileUploadStyles = {
   inputClassName?: string;
@@ -31,12 +33,15 @@ type RHFDropFileUploadProps<T extends FieldValues> = {
   name: Path<T>;
 
   type?: "single" | "multi";
+  accept?: ComponentProps<"input">["accept"];
 
   label?: string;
   placeholder?: string;
   description?: string;
 
   styles?: RHFDropFileUploadStyles;
+
+  children?: ReactNode;
 };
 
 type RHFDropFileUploadType = <T extends FieldValues>(
@@ -60,9 +65,13 @@ const RHFDropFileUpload: RHFDropFileUploadType = ({
   placeholder,
   description,
   styles,
+  children,
+  accept,
   type = "single",
 }) => {
   //
+
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleDrop: HandleDrop = (e, field) => {
     e.preventDefault();
@@ -117,11 +126,13 @@ const RHFDropFileUpload: RHFDropFileUploadType = ({
     field.onChange(updatedFiles);
   };
 
+  const handleCustomButtonClick = () => inputRef.current?.click();
+
   return (
     <FormField
       control={control}
       name={name}
-      render={({ field }) => {
+      render={({ field, fieldState }) => {
         //
 
         return (
@@ -130,73 +141,99 @@ const RHFDropFileUpload: RHFDropFileUploadType = ({
               {label}
             </FormLabel>
             <FormControl>
-              <div
-                onDrop={(e) => handleDrop(e, field)}
-                onDragOver={handleDragOver}
-                className={clsx(
-                  "border-[2px] border-dashed box-border border-neutral-50"
-                )}
-              >
-                {/*  */}
+              {!field?.value && !fieldState.isDirty && (
+                <div
+                  onClick={handleCustomButtonClick}
+                  onDrop={(e) => handleDrop(e, field)}
+                  onDragOver={handleDragOver}
+                  className={clsx(
+                    "",
+                    "cursor-pointer border-2 border-dashed border-gray-700 rounded-xl p-6 flex flex-col items-center justify-center space-y-2 hover:border-blue-500 transition",
+                    "w-[280px] h-[200px]  ",
+                    "transition-all"
+                  )}
+                >
+                  {/*  */}
 
-                <Input
-                  disabled={field.disabled}
-                  name={field.name}
-                  ref={field.ref}
-                  onChange={(e) => {
-                    //
+                  {/* <Video className="h-25 w-25 text-gray-700 fill-gray-700" /> */}
 
-                    if (type === "single") {
+                  {/* icon or sum */}
+                  {children}
+
+                  <>
+                    <p className="text-sm font-medium text-gray-300">
+                      {"Choose file"}
+                    </p>
+
+                    <p className="text-xs text-gray-400">{"MP4 or WebM"}</p>
+                  </>
+
+                  <Input
+                    disabled={field.disabled}
+                    name={field.name}
+                    // ref={field.ref}
+                    accept={accept}
+                    ref={(ref) => {
+                      field.ref(ref);
+                      inputRef.current = ref;
+                    }}
+                    onChange={(e) => {
                       //
 
-                      const file = e.currentTarget.files?.[0];
+                      if (type === "single") {
+                        //
 
-                      if (!file) return;
+                        const file = e.currentTarget.files?.[0];
 
-                      field.onChange(file);
+                        if (!file) return;
 
-                      return;
-                    }
+                        field.onChange(file);
 
-                    //
-                    const selectedFiles = e.currentTarget.files;
-                    const files = selectedFiles
-                      ? Array.from(selectedFiles)
-                      : [];
-                    field.onChange(files);
+                        return;
+                      }
 
-                    //
-                  }}
-                  placeholder={placeholder}
-                  type={"file"}
-                  multiple={type === "multi"}
-                  className={cn(styles?.inputClassName)}
-                />
+                      //
+                      const selectedFiles = e.currentTarget.files;
+                      const files = selectedFiles
+                        ? Array.from(selectedFiles)
+                        : [];
+                      field.onChange(files);
 
-                <div>
-                  {Array.isArray(field?.value) &&
-                    field?.value?.map((file: File, index: number) => {
-                      return (
-                        <div key={index} className="flex gap-1">
-                          <div>{file?.name}</div>
-                          <Button
-                            variant="secondary"
-                            size="icon"
-                            className="size-8"
-                            type="button"
-                            onClick={() => handleRemoval(field, index)}
-                          >
-                            <X />
-                          </Button>
-                        </div>
-                      );
-                    })}
+                      //
+                    }}
+                    placeholder={placeholder}
+                    type={"file"}
+                    multiple={type === "multi"}
+                    className={cn(styles?.inputClassName, "hidden")}
+                  />
 
-                  {!Array.isArray(field.value) && (
-                    <div>{field.value?.["name"]}</div>
-                  )}
+                  <div>
+                    {Array.isArray(field?.value) &&
+                      field?.value?.map((file: File, index: number) => {
+                        return (
+                          <div key={index} className="flex gap-1">
+                            <div>{file?.name}</div>
+                            <Button
+                              variant="secondary"
+                              size="icon"
+                              className="size-8"
+                              type="button"
+                              onClick={() => handleRemoval(field, index)}
+                            >
+                              <X />
+                            </Button>
+                          </div>
+                        );
+                      })}
+
+                    {!Array.isArray(field.value) && (
+                      <div className="text-black text-sm">
+                        {field.value?.["name"]}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
+              )}
             </FormControl>
             <FormDescription className={cn(styles?.descriptionClassName)}>
               {description}
