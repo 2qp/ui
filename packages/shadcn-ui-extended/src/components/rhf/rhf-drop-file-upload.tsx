@@ -38,6 +38,8 @@ type RHFDropFileUploadProps<T extends FieldValues> = {
   label?: string;
   placeholder?: string;
   description?: string;
+  dropText?: string;
+  dropHelperText?: string;
 
   styles?: RHFDropFileUploadStyles;
 
@@ -64,6 +66,8 @@ const RHFDropFileUpload: RHFDropFileUploadType = ({
   label,
   placeholder,
   description,
+  dropText,
+  dropHelperText,
   styles,
   children,
   accept,
@@ -162,10 +166,10 @@ const RHFDropFileUpload: RHFDropFileUploadType = ({
 
                   <>
                     <p className="text-sm font-medium text-gray-300">
-                      {"Choose file"}
+                      {dropText}
                     </p>
 
-                    <p className="text-xs text-gray-400">{"MP4 or WebM"}</p>
+                    <p className="text-xs text-gray-400">{dropHelperText}</p>
                   </>
 
                   <Input
