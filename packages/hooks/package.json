@@ -12,12 +12,12 @@
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@types/node": "^22.15.32",
-    "@types/react": "^19.1.8",
-    "next": "^15.3.3",
-    "react": "^19.1.0",
-    "react-router-dom": "^7.6.2",
-    "typescript": "^5.8.3"
+    "@types/node": "^22.17.1",
+    "@types/react": "^19.1.10",
+    "next": "^15.4.6",
+    "react": "^19.1.1",
+    "react-router-dom": "^7.8.0",
+    "typescript": "^5.9.2"
   },
   "exports": {
     "./*": "./src/*.tsx"
