@@ -17,9 +17,8 @@ import { cn } from "@repo/shadcn-ui/lib/utils";
 import { format, getDate, isValid } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 
-import type { CalendarProps } from "@repo/shadcn-ui/components/calendar";
-import type { JSX, ReactNode } from "react";
-import type { DaySelectionMode } from "react-day-picker";
+import type { ComponentProps, JSX, ReactNode } from "react";
+import type { Mode } from "react-day-picker";
 
 import type {
   Control,
@@ -27,6 +26,8 @@ import type {
   FieldValues,
   Path,
 } from "react-hook-form";
+
+type CalendarProps = ComponentProps<typeof Calendar>;
 
 type RHFDateStyles = {
   calendarClassName?: string;
@@ -51,7 +52,7 @@ type ValidParent<T extends string, TMode, TShape> = TMode extends "range"
 type ExtractTFieldValues<T> =
   T extends Control<infer TFieldValues, unknown> ? TFieldValues : never;
 
-type RHFDateProps<T extends FieldValues, TMode extends DaySelectionMode> = {
+type RHFDateProps<T extends FieldValues, TMode extends Mode> = {
   name: ValidParent<Path<T>, TMode, T>;
 
   control: Control<T>;
@@ -69,7 +70,7 @@ type RHFDateProps<T extends FieldValues, TMode extends DaySelectionMode> = {
   styles?: RHFDateStyles;
 };
 
-type RHFDateType = <T extends FieldValues, TMode extends DaySelectionMode>(
+type RHFDateType = <T extends FieldValues, TMode extends Mode>(
   props: RHFDateProps<T, TMode>
 ) => JSX.Element;
 
@@ -113,7 +114,6 @@ const RHFDate: RHFDateType = ({
                   {...field}
                   selected={field.value}
                   onSelect={field.onChange}
-                  initialFocus
                   numberOfMonths={1}
                   mode={mode}
                   {...config}
@@ -138,7 +138,7 @@ export type { RHFDateProps, RHFDateType };
 // RENDERER
 type RendererProps<T extends FieldValues> = {
   field: ControllerRenderProps<T, Path<T>>;
-  mode: DaySelectionMode;
+  mode: Mode;
 };
 
 type RendererType = <T extends FieldValues>(
@@ -150,7 +150,7 @@ const Renderer: RendererType = ({ mode, field }) => {
   if (!field.value) return <div>{"Pick a date"}</div>;
 
   switch (mode) {
-    case "default":
+    case undefined:
     case "single":
       return (
         <div className="overflow-hidden truncate ">

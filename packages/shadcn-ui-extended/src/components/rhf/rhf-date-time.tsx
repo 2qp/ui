@@ -19,19 +19,16 @@ import { CalendarIcon } from "lucide-react";
 import { useState } from "react";
 import { TimePickerDemo } from "../ui/time-picker-demo";
 
-import type { CalendarProps } from "@repo/shadcn-ui/components/calendar";
-import type { JSX, ReactNode } from "react";
-import type {
-  ActiveModifiers,
-  DateRange,
-  DaySelectionMode,
-} from "react-day-picker";
+import type { ComponentProps, JSX, ReactNode } from "react";
+import type { DateRange, Mode, Modifiers } from "react-day-picker";
 import type {
   Control,
   ControllerRenderProps,
   FieldValues,
   Path,
 } from "react-hook-form";
+
+type CalendarProps = ComponentProps<typeof Calendar>;
 
 type RHFDateTimeStyles = {
   calendarClassName?: string;
@@ -56,7 +53,7 @@ type ValidParent<T extends string, TMode, TShape> = TMode extends "range"
 type ExtractTFieldValues<T> =
   T extends Control<infer TFieldValues, unknown> ? TFieldValues : never;
 
-type RHFDateTimeProps<T extends FieldValues, TMode extends DaySelectionMode> = {
+type RHFDateTimeProps<T extends FieldValues, TMode extends Mode> = {
   name: ValidParent<Path<T>, TMode, T>;
 
   control: Control<T>;
@@ -69,12 +66,12 @@ type RHFDateTimeProps<T extends FieldValues, TMode extends DaySelectionMode> = {
   label?: string;
   description?: ReactNode;
 
-  mode?: TMode;
+  mode: TMode;
 
   styles?: RHFDateTimeStyles;
 };
 
-type RHFDateTimeType = <T extends FieldValues, TMode extends DaySelectionMode>(
+type RHFDateTimeType = <T extends FieldValues, TMode extends Mode>(
   props: RHFDateTimeProps<T, TMode>
 ) => JSX.Element;
 
@@ -88,7 +85,7 @@ const RHFDateTime: RHFDateTimeType = ({
   label,
   description,
   styles,
-  mode,
+  mode = "single" as const,
   config,
 }) => {
   //
@@ -124,7 +121,6 @@ const RHFDateTime: RHFDateTimeType = ({
                 <Calendar
                   {...field}
                   selected={field.value}
-                  initialFocus
                   numberOfMonths={1}
                   // intellisense err
                   mode={mode}
@@ -134,8 +130,8 @@ const RHFDateTime: RHFDateTimeType = ({
                   onSelect={(
                     arg1: Date | Date[] | DateRange | undefined,
                     selectedDay: Date,
-                    activeModifiers: ActiveModifiers,
-                    e: React.MouseEvent
+                    activeModifiers: Modifiers,
+                    e: React.MouseEvent | React.KeyboardEvent
                   ) => {
                     // argument is undefined
                     if (typeof arg1 === "undefined") {
@@ -198,7 +194,7 @@ const RHFDateTime: RHFDateTimeType = ({
                   {/* https://time.openstatus.dev */}
 
                   {/*  */}
-                  {(mode === "single" || mode === "default") && (
+                  {(mode === "single" || mode === undefined) && (
                     <div className="w-full justify-center flex">
                       <TimePickerDemo
                         setDate={field.onChange}
@@ -267,7 +263,7 @@ const RHFDateTime: RHFDateTimeType = ({
 
 type RendererProps<T extends FieldValues> = {
   field: ControllerRenderProps<T, Path<T>>;
-  mode: DaySelectionMode | undefined;
+  mode: Mode | undefined;
 };
 
 type RendererType = <T extends FieldValues>(
@@ -279,7 +275,7 @@ const Renderer: RendererType = ({ mode, field }) => {
   if (!field.value) return <div>{"Pick a date"}</div>;
 
   switch (mode) {
-    case "default":
+    case undefined:
     case "single":
       return (
         <div className="overflow-hidden truncate ">
@@ -338,7 +334,7 @@ const formatMultipleDates = (dates: Date[]): string => {
         ? dayMap.get(day)!
         : dayMap.set(day, []) && dayMap.get(day)!;
 
-      return times.push(time), acc;
+      return (times.push(time), acc);
     }, new Map())
   )
     .map(
