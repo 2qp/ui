@@ -12,5 +12,7 @@
     "ngClass",
     ".*Styles",
     ".*ClassName"
-  ]
+  ],
+
+  "tailwindCSS.experimental.configFile": "packages/shadcn-ui/src/styles/globals.css"
 }
