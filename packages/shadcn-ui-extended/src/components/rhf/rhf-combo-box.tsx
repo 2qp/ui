@@ -42,12 +42,34 @@ type RHFComboBoxeDataPoint = {
   leading?: ReactNode;
 } & RHFCommandItemProps;
 
-type RHFComboBoxProps<T extends FieldValues> = {
-  name: Path<T>;
+// --- TYPE GUARD ---
+type StringPattern<T> = {
+  [K in keyof T]: T[K] extends `${infer _}` ? K : never;
+}[keyof T];
+
+type ArrayStringPattern<T> = {
+  [K in keyof T]: T[K] extends string[] ? K : never;
+}[keyof T];
+
+type ComboNameGuard<T extends string, TShape, TMode> = TMode extends
+  | undefined
+  | false
+  ? T extends StringPattern<TShape>
+    ? T
+    : never
+  : TMode extends true
+    ? T extends ArrayStringPattern<TShape>
+      ? T
+      : never
+    : never;
+// --- ---
+
+type RHFComboBoxProps<T extends FieldValues, TMode> = {
+  name: ComboNameGuard<Path<T>, T, TMode>;
   control: Control<T>;
 
   data: RHFComboBoxeDataPoint[] | Readonly<RHFComboBoxeDataPoint[]>;
-  multi?: boolean;
+  multi?: TMode;
 
   readOnly?: boolean;
   disabled?: boolean;
@@ -58,8 +80,11 @@ type RHFComboBoxProps<T extends FieldValues> = {
   styles?: RHFComboBoxStyles;
 };
 
-type RHFComboBoxType = <T extends FieldValues>(
-  props: RHFComboBoxProps<T>
+type RHFComboBoxType = <
+  T extends FieldValues,
+  TMode extends boolean | undefined = undefined,
+>(
+  props: RHFComboBoxProps<T, TMode>
 ) => JSX.Element;
 
 const RHFComboBox: RHFComboBoxType = ({
