@@ -19,7 +19,6 @@ import { CalendarIcon } from "lucide-react";
 
 import type { ComponentProps, JSX, ReactNode } from "react";
 import type { Mode } from "react-day-picker";
-
 import type {
   Control,
   ControllerRenderProps,
@@ -41,7 +40,7 @@ type ExtractDateArrayKey<T> = {
   [K in keyof T]: T[K] extends Date[] | undefined ? K : never;
 }[keyof T];
 
-type ValidParent<T extends string, TMode, TShape> = TMode extends "range"
+type Parents<T, TMode, TShape> = TMode extends "range"
   ? T extends `${infer Parent}.from` | `${infer Parent}.to`
     ? `${Parent}`
     : never
@@ -49,11 +48,10 @@ type ValidParent<T extends string, TMode, TShape> = TMode extends "range"
     ? ExtractDateArrayKey<TShape>
     : T;
 
-type ExtractTFieldValues<T> =
-  T extends Control<infer TFieldValues, unknown> ? TFieldValues : never;
+type NameGuard<T, TMode, TShape> = Extract<Parents<T, TMode, TShape>, T>;
 
 type RHFDateProps<T extends FieldValues, TMode extends Mode> = {
-  name: ValidParent<Path<T>, TMode, T>;
+  name: NameGuard<Path<T>, TMode, T>;
 
   control: Control<T>;
 
@@ -87,7 +85,7 @@ const RHFDate: RHFDateType = ({
   return (
     <FormField
       control={control}
-      name={name as Path<ExtractTFieldValues<typeof control>>}
+      name={name}
       render={({ field }) => {
         //
 

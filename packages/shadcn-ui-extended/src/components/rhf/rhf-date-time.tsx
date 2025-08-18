@@ -38,23 +38,26 @@ type RHFDateTimeStyles = {
 
 type RHFDateTimeConfig = Omit<CalendarProps, "selected" | "onSelect" | "mode">;
 
+// --- TYPE GUARD ---
+
 type ExtractDateArrayKey<T> = {
   [K in keyof T]: T[K] extends Date[] | undefined ? K : never;
 }[keyof T];
 
-type ValidParent<T extends string, TMode, TShape> = TMode extends "range"
-  ? T extends `${infer Parent}.from` | `${infer Parent}.to`
-    ? `${Parent}`
+type Parents<T, TMode, TShape> = TMode extends "range"
+  ? T extends `${infer P}.from` | `${infer P}.to`
+    ? P
     : never
   : TMode extends "multiple"
     ? ExtractDateArrayKey<TShape>
     : T;
 
-type ExtractTFieldValues<T> =
-  T extends Control<infer TFieldValues, unknown> ? TFieldValues : never;
+type NameGuard<T, TMode, TShape> = Extract<Parents<T, TMode, TShape>, T>;
+
+// --- ---
 
 type RHFDateTimeProps<T extends FieldValues, TMode extends Mode> = {
-  name: ValidParent<Path<T>, TMode, T>;
+  name: NameGuard<Path<T>, TMode, T>;
 
   control: Control<T>;
 
@@ -95,7 +98,7 @@ const RHFDateTime: RHFDateTimeType = ({
   return (
     <FormField
       control={control}
-      name={name as Path<ExtractTFieldValues<typeof control>>}
+      name={name}
       render={({ field }) => {
         //
 
