@@ -23,9 +23,15 @@ import {
 import { cn } from "@repo/shadcn-ui/lib/utils";
 import clsx from "clsx";
 import { Check, ChevronsUpDown } from "lucide-react";
+import { useCallback, useMemo } from "react";
 
 import type { ComponentPropsWithoutRef, JSX, ReactNode } from "react";
-import type { Control, FieldValues, Path } from "react-hook-form";
+import type {
+  Control,
+  ControllerRenderProps,
+  FieldValues,
+  Path,
+} from "react-hook-form";
 
 type RHFCommandItemProps = ComponentPropsWithoutRef<typeof CommandItem>;
 
@@ -37,54 +43,81 @@ type RHFComboBoxStyles = {
   descriptionClassName?: string;
 };
 
-type RHFComboBoxeDataPoint = {
+type RHFComboBoxItem = {
   label: string;
   leading?: ReactNode;
+  value: string;
 } & RHFCommandItemProps;
 
+type RHFComboBoxGroup = {
+  id: string;
+  label?: string;
+  items: RHFComboBoxItem[];
+};
+
+type DataLifeCycle = {
+  data: RHFComboBoxGroup[] | Readonly<RHFComboBoxGroup[]>;
+} & (
+  | { precompute: true }
+  | {
+      precompute: false;
+      /**
+       * labelsByValue `Record<value, label>`
+       */
+      labels: Record<string, string>;
+    }
+);
+
 // --- TYPE GUARD ---
-type StringPattern<T> = {
+
+type LiteralStringKeys<T> = {
   [K in keyof T]: T[K] extends `${infer _}` ? K : never;
 }[keyof T];
 
-type ArrayStringPattern<T> = {
-  [K in keyof T]: T[K] extends string[] ? K : never;
+type StringKeys<T> = {
+  [K in keyof T]: T[K] extends string ? K : never;
 }[keyof T];
 
-type ComboNameGuard<T extends string, TShape, TMode> = TMode extends
-  | undefined
-  | false
-  ? T extends StringPattern<TShape>
+type RestrictKeys<
+  T extends string | string[],
+  TShape,
+  TSafety extends boolean | undefined = true,
+> = TSafety extends true | undefined
+  ? T extends LiteralStringKeys<TShape>
     ? T
     : never
-  : TMode extends true
-    ? T extends ArrayStringPattern<TShape>
-      ? T
-      : never
+  : T extends StringKeys<TShape>
+    ? T
     : never;
+
 // --- ---
 
-type RHFComboBoxProps<T extends FieldValues, TMode> = {
-  name: ComboNameGuard<Path<T>, T, TMode>;
+type RHFComboBoxProps<
+  T extends FieldValues,
+  TSafety extends boolean | undefined = true,
+> = {
+  name: RestrictKeys<Path<T>, T, TSafety>;
   control: Control<T>;
 
-  data: RHFComboBoxeDataPoint[] | Readonly<RHFComboBoxeDataPoint[]>;
-  multi?: TMode;
+  safety?: TSafety;
 
   readOnly?: boolean;
   disabled?: boolean;
 
   label?: string;
+  empty?: string;
+  searchholder?: string;
+  placeholder?: string;
   description?: string;
 
   styles?: RHFComboBoxStyles;
-};
+} & DataLifeCycle;
 
 type RHFComboBoxType = <
   T extends FieldValues,
-  TMode extends boolean | undefined = undefined,
+  TSafety extends boolean | undefined = true,
 >(
-  props: RHFComboBoxProps<T, TMode>
+  props: RHFComboBoxProps<T, TSafety>
 ) => JSX.Element;
 
 const RHFComboBox: RHFComboBoxType = ({
@@ -92,128 +125,136 @@ const RHFComboBox: RHFComboBoxType = ({
   name,
   label,
   data,
+  empty,
+  searchholder,
+  placeholder,
   description,
   styles,
-  multi = false,
+  disabled,
+  readOnly,
+
+  ...props
 }) => {
+  //
+
+  //
+  const labels = useMemo(() => {
+    if (!props.precompute) return props.labels;
+
+    const labelsByValue: Record<string, string> = {};
+    const groups = data;
+    const length = data.length;
+
+    for (let i = 0; i < length; i++) {
+      const group = groups[i];
+      if (!group) continue;
+
+      const len = group.items.length;
+
+      for (let j = 0; j < len; j++) {
+        const item = group.items[j];
+        if (!item) continue;
+
+        labelsByValue[item.value] = item.label;
+      }
+    }
+
+    return labelsByValue;
+  }, [data, props]);
+
+  const isSelected = <T extends FieldValues>(
+    point: RHFComboBoxItem,
+    fieldValue: ControllerRenderProps<T, Path<T>>["value"]
+  ) => fieldValue === point.value;
+
+  const getSelectedLabel = useCallback(
+    (value: string): string | undefined => labels[value],
+    [labels]
+  );
+
   return (
     <FormField
       control={control}
       name={name}
-      render={({ field }) => {
-        //
-        const valueSet = new Set(field.value);
+      render={({ field }) => (
+        <FormItem className="flex flex-col">
+          <FormLabel className={cn(styles?.labelClassName)}>{label}</FormLabel>
+          <Popover>
+            <PopoverTrigger ref={field.ref} asChild>
+              <FormControl>
+                <Button
+                  disabled={disabled}
+                  variant="outline"
+                  role="combobox"
+                  className={cn(
+                    "w-[200px] justify-between",
+                    !field.value && "text-muted-foreground"
+                  )}
+                >
+                  <p className="overflow-hidden truncate">
+                    {getSelectedLabel(field.value) || placeholder}
+                  </p>
 
-        const values = data
-          .filter((point) => valueSet.has(point.value))
-          .map((point) => point.label)
-          .join(", ");
+                  <ChevronsUpDown className="opacity-50" />
+                </Button>
+              </FormControl>
+            </PopoverTrigger>
+            <PopoverContent className="w-[200px] p-0">
+              <Command>
+                <CommandInput
+                  readOnly={readOnly}
+                  placeholder={searchholder}
+                  className="h-9"
+                />
+                <CommandList>
+                  <CommandEmpty>{empty}</CommandEmpty>
+                  {data.map((group) => (
+                    <CommandGroup key={group.id} heading={group.label}>
+                      {group.items.map((item, index) => {
+                        //
 
-        return (
-          <FormItem className="flex flex-col">
-            <FormLabel className={cn(styles?.labelClassName)}>
-              {label}
-            </FormLabel>
-            <Popover>
-              <PopoverTrigger ref={field.ref} asChild>
-                <FormControl>
-                  <Button
-                    variant="outline"
-                    role="combobox"
-                    className={cn(
-                      "w-[200px] justify-between",
-                      !field.value && "text-muted-foreground"
-                    )}
-                  >
-                    {!multi &&
-                      (field.value
-                        ? data.find((point) => point.value === field.value)
-                            ?.label
-                        : "Select language")}
+                        const selected = isSelected(item, field.value);
 
-                    {multi && (
-                      <p className="overflow-hidden truncate">{values}</p>
-                    )}
-
-                    <ChevronsUpDown className="opacity-50" />
-                  </Button>
-                </FormControl>
-              </PopoverTrigger>
-              <PopoverContent className="w-[200px] p-0">
-                <Command>
-                  <CommandInput
-                    placeholder="Search framework..."
-                    className="h-9"
-                  />
-                  <CommandList>
-                    <CommandEmpty>No framework found.</CommandEmpty>
-                    <CommandGroup>
-                      {data.map((point, index) => (
-                        <CommandItem
-                          {...point}
-                          value={point.value}
-                          keywords={[point.label]}
-                          key={index}
-                          onSelect={() => {
-                            //
-                            if (!multi) {
-                              field.onChange(point.value);
-                              return;
+                        return (
+                          <CommandItem
+                            {...item}
+                            value={item.value}
+                            keywords={[item.label]}
+                            key={item.id || index}
+                            onSelect={() =>
+                              field.onChange(
+                                field.value === item.value ? "" : item.value
+                              )
                             }
-
-                            //
-
-                            if (!field.value) {
-                              //
-                              field.onChange([point.value]);
-                              return;
-                            }
-
-                            if (Array.isArray(field.value)) {
-                              // const valueSet = new Set(field.value);
-
-                              if (valueSet.has(point.value)) {
-                                //
-                                const set = new Set(valueSet);
-                                set.delete(point.value);
-
-                                field.onChange([...set]);
-                                return;
-                              }
-
-                              const set = new Set(valueSet).add(point.value);
-                              field.onChange([...set]);
-                              return;
-                            }
-
-                            //
-                          }}
-                        >
-                          <div key={index + "-leading"}>{point.leading}</div>
-                          <div key={index + "-value"}>{point.label}</div>
-
-                          <Check
-                            key={index + "-check"}
-                            className={clsx("opacity-0 ml-auto", {
-                              "opacity-100":
-                                valueSet.has(point.value) ||
-                                field.value === point.value,
-                            })}
-                          />
-                        </CommandItem>
-                      ))}
+                          >
+                            <div className="flex items-center justify-between w-full">
+                              <div>{item.leading}</div>
+                              <div>{item.label}</div>
+                              <Check
+                                className={clsx(
+                                  "ml-auto transition-opacity duration-75",
+                                  {
+                                    "opacity-0": !selected,
+                                    "opacity-100": selected,
+                                  }
+                                )}
+                              />
+                            </div>
+                          </CommandItem>
+                        );
+                      })}
                     </CommandGroup>
-                  </CommandList>
-                </Command>
-              </PopoverContent>
-            </Popover>
-            <FormDescription className={cn(" ", styles?.descriptionClassName)}>
-              {description}
-            </FormDescription>
-            <FormMessage />
-          </FormItem>
-        );
-      }}
+                  ))}
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+          <FormDescription className={cn(" ", styles?.descriptionClassName)}>
+            {description}
+          </FormDescription>
+          <FormMessage />
+        </FormItem>
+      )}
     />
   );
 };
