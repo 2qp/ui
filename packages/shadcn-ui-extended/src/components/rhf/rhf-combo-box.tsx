@@ -25,7 +25,10 @@ import { cn } from "@repo/shadcn-ui/lib/utils";
 import clsx from "clsx";
 import { Check, ChevronsUpDown } from "lucide-react";
 
-import type { DataLifeCycle } from "@repo/shadcn-ui-extended/hooks/use-combo";
+import type {
+  DataLifeCycle,
+  RestrictKeys,
+} from "@repo/shadcn-ui-extended/hooks/use-combo";
 import type { JSX } from "react";
 import type { Control, FieldValues, Path } from "react-hook-form";
 
@@ -36,30 +39,6 @@ type RHFComboBoxStyles = {
   labelClassName?: string;
   descriptionClassName?: string;
 };
-
-// --- TYPE GUARD ---
-
-type LiteralStringKeys<T> = {
-  [K in keyof T]: T[K] extends `${infer _}` ? K : never;
-}[keyof T];
-
-type StringKeys<T> = {
-  [K in keyof T]: T[K] extends string ? K : never;
-}[keyof T];
-
-type RestrictKeys<
-  T extends string | string[],
-  TShape,
-  TSafety extends boolean | undefined = true,
-> = TSafety extends true | undefined
-  ? T extends LiteralStringKeys<TShape>
-    ? T
-    : never
-  : T extends StringKeys<TShape>
-    ? T
-    : never;
-
-// --- ---
 
 type RHFComboBoxProps<
   T extends FieldValues,

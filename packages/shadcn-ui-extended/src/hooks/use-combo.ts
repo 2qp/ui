@@ -2,6 +2,30 @@ import { useCallback, useMemo } from "react";
 
 import type { ReactNode } from "react";
 
+// --- TYPE GUARD ---
+
+type LiteralStringKeys<T> = {
+  [K in keyof T]: T[K] extends `${infer _}` ? K : never;
+}[keyof T];
+
+type StringKeys<T> = {
+  [K in keyof T]: T[K] extends string ? K : never;
+}[keyof T];
+
+type RestrictKeys<
+  T extends string | string[],
+  TShape,
+  TSafety extends boolean | undefined = true,
+> = TSafety extends true | undefined
+  ? T extends LiteralStringKeys<TShape>
+    ? T
+    : never
+  : T extends StringKeys<TShape>
+    ? T
+    : never;
+
+// --- ---
+
 type RHFComboBoxItem = {
   id: string;
   label: string;
@@ -81,4 +105,4 @@ const useCombo: UseComboType = (props) => {
 };
 
 export { useCombo };
-export type { DataLifeCycle, UseComboParams, UseComboType };
+export type { DataLifeCycle, RestrictKeys, UseComboParams, UseComboType };
