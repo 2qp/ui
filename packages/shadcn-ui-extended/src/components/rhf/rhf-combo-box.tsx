@@ -92,7 +92,7 @@ const RHFComboBox: RHFComboBoxType = ({
       render={({ field }) => (
         <FormItem className="flex flex-col">
           <FormLabel className={cn(styles?.labelClassName)}>{label}</FormLabel>
-          <Popover>
+          <Popover modal={true}>
             <PopoverTrigger ref={field.ref} asChild>
               <FormControl>
                 <Button
