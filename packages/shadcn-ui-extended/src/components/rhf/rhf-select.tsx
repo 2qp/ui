@@ -9,7 +9,9 @@ import {
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@repo/shadcn-ui/components/select";
@@ -30,7 +32,7 @@ type RHFSelectProps<T extends FieldValues> = {
   name: Path<T>;
   control: Control<T>;
 
-  data: RHFSelectDataPoint[] | Readonly<RHFSelectDataPoint[]>;
+  data: RHFSelectGroup[] | Readonly<RHFSelectGroup[]>;
 
   readOnly?: boolean;
   disabled?: boolean;
@@ -42,10 +44,17 @@ type RHFSelectProps<T extends FieldValues> = {
   styles?: RHFSelectStyles;
 };
 
-type RHFSelectDataPoint = {
+type RHFSelectItem = {
+  id: string;
   label: string;
   leading?: ReactNode;
 } & RHFSelectItemProps;
+
+type RHFSelectGroup = {
+  id: string;
+  label: string;
+  items: RHFSelectItem[] | Readonly<RHFSelectItem[]>;
+};
 
 type RHFSelectType = <T extends FieldValues>(
   props: RHFSelectProps<T>
@@ -65,35 +74,38 @@ const RHFSelect: RHFSelectType = ({
     <FormField
       control={control}
       name={name}
-      render={({ field }) => {
-        //
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel>{label}</FormLabel>
+          <Select
+            {...field}
+            onValueChange={field.onChange}
+            defaultValue={field.value}
+          >
+            <FormControl>
+              <SelectTrigger ref={field.ref}>
+                <SelectValue placeholder={placeholder} />
+              </SelectTrigger>
+            </FormControl>
 
-        return (
-          <FormItem>
-            <FormLabel>{label}</FormLabel>
-            <Select {...field} onValueChange={field.onChange}>
-              <FormControl>
-                <SelectTrigger ref={field.ref}>
-                  <SelectValue placeholder={placeholder} />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                {data?.map((point, index) => {
-                  //
+            <SelectContent>
+              {data?.map((group) => (
+                <SelectGroup key={group.id}>
+                  {group.label && <SelectLabel>{group.label}</SelectLabel>}
 
-                  return (
-                    <SelectItem key={index} {...point}>
-                      {point.label}
+                  {group?.items?.map((data) => (
+                    <SelectItem key={data.id} {...data}>
+                      {data.label}
                     </SelectItem>
-                  );
-                })}
-              </SelectContent>
-            </Select>
-            <FormDescription>{description}</FormDescription>
-            <FormMessage />
-          </FormItem>
-        );
-      }}
+                  ))}
+                </SelectGroup>
+              ))}
+            </SelectContent>
+          </Select>
+          <FormDescription>{description}</FormDescription>
+          <FormMessage />
+        </FormItem>
+      )}
     />
   );
 };
