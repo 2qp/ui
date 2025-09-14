@@ -28,11 +28,35 @@ type RHFSelectStyles = {
   descriptionClassName?: string;
 };
 
-type RHFSelectProps<T extends FieldValues> = {
-  name: Path<T>;
+type LiteralStringKeys<T> = {
+  [K in keyof T]: T[K] extends `${infer _}` ? K : never;
+}[keyof T];
+
+type StringKeys<T> = {
+  [K in keyof T]: T[K] extends string ? K : never;
+}[keyof T];
+
+type RestrictKeys<
+  T extends string | string[],
+  TShape,
+  TSafety,
+> = TSafety extends true | undefined
+  ? T extends LiteralStringKeys<TShape>
+    ? T
+    : never
+  : T extends StringKeys<TShape>
+    ? T
+    : never;
+
+type RHFSelectProps<
+  T extends FieldValues,
+  TSafety extends boolean | undefined,
+> = {
+  name: RestrictKeys<Path<T>, T, TSafety>;
   control: Control<T>;
 
   data: RHFSelectGroup[] | Readonly<RHFSelectGroup[]>;
+  safety?: TSafety;
 
   readOnly?: boolean;
   disabled?: boolean;
@@ -56,8 +80,11 @@ type RHFSelectGroup = {
   items: RHFSelectItem[] | Readonly<RHFSelectItem[]>;
 };
 
-type RHFSelectType = <T extends FieldValues>(
-  props: RHFSelectProps<T>
+type RHFSelectType = <
+  T extends FieldValues,
+  TSafety extends boolean | undefined = true,
+>(
+  props: RHFSelectProps<T, TSafety>
 ) => JSX.Element;
 
 const RHFSelect: RHFSelectType = ({
