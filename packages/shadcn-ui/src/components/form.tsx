@@ -139,6 +139,14 @@ function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
   const { error, formMessageId } = useFormField()
   const body = error ? String(error?.message ?? "") : props.children
 
+//   const errorBody = Array.isArray(error)
+//     ? error
+//         .map((err) => err?.message ?? "")
+//         .filter(Boolean)
+//         .join(", ")
+//     : String(error?.message ?? "");
+
+// const body = errorBody || props.children;
   if (!body) {
     return null
   }
