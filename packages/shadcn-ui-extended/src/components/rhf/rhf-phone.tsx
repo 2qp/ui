@@ -1,3 +1,4 @@
+import { usePhone } from "@repo/shadcn-ui-extended/hooks/use-phone";
 import { Button } from "@repo/shadcn-ui/components/button";
 import {
   Command,
@@ -23,9 +24,13 @@ import {
 } from "@repo/shadcn-ui/components/popover";
 import { cn } from "@repo/shadcn-ui/lib/utils";
 import { ChevronsUpDown } from "lucide-react";
-import { useMemo } from "react";
+import { CircleFlag } from "react-circle-flags";
 
-import type { ComponentProps, JSX, ReactNode } from "react";
+import type {
+  CountryCode,
+  ValidParent,
+} from "@repo/shadcn-ui-extended/hooks/use-phone";
+import type { ComponentProps, JSX } from "react";
 import type { Control, FieldValues, Path } from "react-hook-form";
 
 // see .vscode tw attributes
@@ -35,47 +40,13 @@ type RHFPhoneStyles = {
   descriptionClassName?: string;
 };
 
-// --- TYPE GUARD ---
-
-type GetPrefix<T, Suffix extends string> = T extends `${infer Prefix}.${Suffix}`
-  ? Prefix
-  : never;
-
-type TupleToIntersection<T extends readonly unknown[]> = T extends [
-  infer First,
-  ...infer Rest,
-]
-  ? First & TupleToIntersection<Rest>
-  : unknown;
-
-type ParentPrefixes<
-  T,
-  Suffixes extends readonly string[],
-> = TupleToIntersection<{
-  [K in keyof Suffixes]: GetPrefix<T, Suffixes[K] & string>;
-}>;
-
-//---
-
-type ValidParent<T> = Extract<ParentPrefixes<T, ["dialCode", "number"]>, T>;
-
 // --- ---
-
-type RHFCommandItemProps = ComponentProps<typeof CommandItem>;
-
-type RHFPhoneLeadingDataPoint = RHFCommandItemProps & {
-  label: string;
-  leading?: ReactNode;
-  value: string; // !
-  code: string;
-};
 
 type RHFPhoneProps<T extends FieldValues> = {
   control: Control<T>;
-
   /**
    * **Zod schema object** (or parent schema) name
-   * that contains the properties `.dialCode` and `.number`.
+   * that contains the properties `.country` and `.number`.
    */
   name: ValidParent<Path<T>>;
 
@@ -85,8 +56,6 @@ type RHFPhoneProps<T extends FieldValues> = {
   empty?: string;
   leadingPlaceholder?: string;
   description?: string;
-
-  leading: RHFPhoneLeadingDataPoint[] | Readonly<RHFPhoneLeadingDataPoint[]>;
 
   styles?: RHFPhoneStyles;
 };
@@ -104,14 +73,11 @@ const RHFPhone: RHFPhoneType = ({
   leadingPlaceholder,
   description,
   styles,
-  leading,
   type = "tel",
 }) => {
   //
 
-  const leadingMap = useMemo(() => {
-    return new Map(leading.map((item) => [item.value, item]));
-  }, [leading]);
+  const [array, format, replace] = usePhone();
 
   return (
     <FormField
@@ -120,42 +86,47 @@ const RHFPhone: RHFPhoneType = ({
       render={({ field }) => {
         //
 
-        // const selected = leading.find(
-        //   (code) => code.value === field?.value?.["dialCode"]
-        // );
+        const numberField: string = field.value?.["number"];
+        const countryField: CountryCode = field.value?.["country"];
 
-        const selected = leadingMap.get(field?.value?.["dialCode"]);
+        const { country, number } = format({
+          number: numberField,
+          country: countryField,
+        });
 
         return (
           <FormItem>
-            <FormLabel className={cn(styles?.labelClassName)}>
+            <FormLabel id={name} className={cn(styles?.labelClassName)}>
               {label}
             </FormLabel>
             <FormControl>
               <div className="flex gap-2">
                 {/* COMBO */}
 
-                <Popover>
+                <Popover modal={true}>
                   <PopoverTrigger ref={field.ref} asChild>
-                    <FormControl>
-                      <Button
-                        variant="outline"
-                        role="combobox"
-                        className={cn(
-                          "min-w-[125px] justify-between",
-                          !field.value && "text-muted-foreground"
-                        )}
-                      >
-                        {selected ? (
-                          <div className="flex gap-2 items-center w-full justify-between">
-                            {selected.leading} {selected.value}
-                          </div>
-                        ) : (
-                          "Select dial code"
-                        )}
-                        <ChevronsUpDown className="opacity-50" />
-                      </Button>
-                    </FormControl>
+                    <Button
+                      variant="outline"
+                      role="combobox"
+                      className={cn(
+                        "w-fit justify-between",
+                        !numberField && "text-muted-foreground"
+                      )}
+                    >
+                      {country ? (
+                        <span>
+                          {/*  */}
+                          <CircleFlag
+                            countryCode={country?.toLowerCase()}
+                            height={25}
+                            width={25}
+                          />
+                        </span>
+                      ) : (
+                        <SkelentonLoader />
+                      )}
+                      <ChevronsUpDown className="opacity-50" />
+                    </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-[200px] p-0">
                     <Command>
@@ -166,23 +137,33 @@ const RHFPhone: RHFPhoneType = ({
                       <CommandList>
                         <CommandEmpty>{empty}</CommandEmpty>
                         <CommandGroup>
-                          {leading.map((point, index) => (
+                          {array.map((point, index) => (
                             <CommandItem
                               {...point}
                               value={point.value}
-                              keywords={[point.label, point.value, point.code]}
+                              keywords={point.keywords}
                               key={index}
-                              onSelect={() =>
+                              onSelect={() => {
+                                const result = replace(
+                                  numberField,
+                                  point.value
+                                );
+
                                 field.onChange({
-                                  ...field.value,
-                                  dialCode: point.value,
-                                })
-                              }
+                                  number: result,
+                                  country: point.value,
+                                });
+                              }}
                             >
-                              <div key={index + "-leading"}>
-                                {point.leading}
+                              <div className="flex gap-5">
+                                {/*  */}
+                                <CircleFlag
+                                  countryCode={point.value.toLowerCase()}
+                                  height={25}
+                                  width={25}
+                                />
+                                <div>{point.label}</div>
                               </div>
-                              <div key={index + "-value"}>{point.label}</div>
                             </CommandItem>
                           ))}
                         </CommandGroup>
@@ -196,13 +177,13 @@ const RHFPhone: RHFPhoneType = ({
                 <Input
                   key={"number"}
                   {...field}
-                  value={field?.value?.["number"] ?? ""}
-                  onChange={(e) => {
+                  value={number}
+                  onChange={(e) =>
                     field.onChange({
-                      ...field.value,
+                      country,
                       number: e.currentTarget.value,
-                    });
-                  }}
+                    })
+                  }
                   placeholder={placeholder}
                   type={type}
                   className={cn(styles?.inputClassName)}
@@ -217,6 +198,20 @@ const RHFPhone: RHFPhoneType = ({
         );
       }}
     />
+  );
+};
+
+//
+// type SkelentonLoaderProps = {};
+
+type SkelentonLoaderType = () => JSX.Element;
+
+const SkelentonLoader: SkelentonLoaderType = () => {
+  return (
+    <div
+      className="animate-pulse bg-gray-300 rounded-full"
+      style={{ width: 25, height: 25 }}
+    ></div>
   );
 };
 
