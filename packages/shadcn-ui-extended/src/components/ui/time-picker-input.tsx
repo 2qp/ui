@@ -3,8 +3,8 @@ import {
   getDateByType,
   setDateByType,
 } from "@repo/shadcn-ui-extended/utils/time-picker-utils";
-import { Input } from "@repo/shadcn-ui/components/input";
-import { cn } from "@repo/shadcn-ui/lib/utils";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 import React from "react";
 
 import type {

@@ -5,8 +5,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@repo/shadcn-ui/components/form";
-import { cn } from "@repo/shadcn-ui/lib/utils";
+} from "@/components/ui/form";
+import { cn } from "@/lib/utils";
 import { TimePicker12Demo } from "../ui/time-picker-12h-demo";
 import { TimePickerDemo } from "../ui/time-picker-demo";
 

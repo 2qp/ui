@@ -1,10 +1,10 @@
 import { useMultiCollapsibleCombo as useMultiCombo } from "@repo/shadcn-ui-extended/hooks/use-multi-collapsible-combo";
-import { Button } from "@repo/shadcn-ui/components/button";
+import { Button } from "@/components/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@repo/shadcn-ui/components/collapsible";
+} from "@/components/ui/collapsible";
 import {
   Command,
   CommandEmpty,
@@ -12,7 +12,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@repo/shadcn-ui/components/command";
+} from "@/components/ui/command";
 import {
   FormControl,
   FormDescription,
@@ -20,13 +20,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@repo/shadcn-ui/components/form";
+} from "@/components/ui/form";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@repo/shadcn-ui/components/popover";
-import { cn } from "@repo/shadcn-ui/lib/utils";
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 import clsx from "clsx";
 import { Check, ChevronDown } from "lucide-react";
 import { useCallback, useMemo } from "react";

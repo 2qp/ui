@@ -5,12 +5,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@repo/shadcn-ui/components/form";
+} from "@/components/ui/form";
 import {
   RadioGroup,
   RadioGroupItem,
-} from "@repo/shadcn-ui/components/radio-group";
-import { cn } from "@repo/shadcn-ui/lib/utils";
+} from "@/components/ui/radio-group";
+import { cn } from "@/lib/utils";
 
 import type { ComponentPropsWithoutRef, JSX, ReactNode } from "react";
 import type { Control, FieldValues, Path } from "react-hook-form";

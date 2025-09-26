@@ -1,5 +1,5 @@
-import { Button } from "@repo/shadcn-ui/components/button";
-import { Calendar } from "@repo/shadcn-ui/components/calendar";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   FormControl,
   FormDescription,
@@ -7,13 +7,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@repo/shadcn-ui/components/form";
+} from "@/components/ui/form";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@repo/shadcn-ui/components/popover";
-import { cn } from "@repo/shadcn-ui/lib/utils";
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 import { format, isSameDay, isValid } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useState } from "react";

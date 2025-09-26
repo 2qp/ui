@@ -1,4 +1,4 @@
-import { Button } from "@repo/shadcn-ui/components/button";
+import { Button } from "@/components/ui/button";
 import {
   FormControl,
   FormDescription,
@@ -6,8 +6,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@repo/shadcn-ui/components/form";
-import { cn } from "@repo/shadcn-ui/lib/utils";
+} from "@/components/ui/form";
+import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
 
 import type { JSX } from "react";

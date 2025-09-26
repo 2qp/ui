@@ -5,9 +5,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@repo/shadcn-ui/components/form";
-import { Textarea } from "@repo/shadcn-ui/components/textarea";
-import { cn } from "@repo/shadcn-ui/lib/utils";
+} from "@/components/ui/form";
+import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
 
 import type { JSX } from "react";
 import type { Control, FieldValues, Path } from "react-hook-form";

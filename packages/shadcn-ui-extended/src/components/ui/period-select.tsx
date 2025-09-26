@@ -12,7 +12,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@repo/shadcn-ui/components/select";
+} from "@/components/ui/select";
 
 export interface PeriodSelectorProps {
   period: Period;

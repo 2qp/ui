@@ -1,4 +1,4 @@
-import { Button } from "@repo/shadcn-ui/components/button";
+import { Button } from "@/components/ui/button";
 import {
   FormControl,
   FormDescription,
@@ -6,9 +6,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@repo/shadcn-ui/components/form";
-import { Input } from "@repo/shadcn-ui/components/input";
-import { cn } from "@repo/shadcn-ui/lib/utils";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 import clsx from "clsx";
 import { X } from "lucide-react";
 import { useRef } from "react";

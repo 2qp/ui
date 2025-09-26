@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { Label } from "@repo/shadcn-ui/components/label";
+import { Label } from "@/components/ui/label";
 import { TimePeriodSelect } from "./period-select";
 import { TimePickerInput } from "./time-picker-input";
 

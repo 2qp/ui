@@ -5,13 +5,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@repo/shadcn-ui/components/form";
+} from "@/components/ui/form";
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSeparator,
   InputOTPSlot,
-} from "@repo/shadcn-ui/components/input-otp";
+} from "@/components/ui/input-otp";
 import { Fragment, useMemo } from "react";
 
 import type { ComponentPropsWithoutRef, JSX } from "react";

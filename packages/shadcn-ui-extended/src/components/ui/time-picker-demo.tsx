@@ -1,7 +1,7 @@
 "use client";
 
 import { TimePickerInput } from "@repo/shadcn-ui-extended/components/ui/time-picker-input";
-import { Label } from "@repo/shadcn-ui/components/label";
+import { Label } from "@/components/ui/label";
 import { Clock } from "lucide-react";
 import * as React from "react";
 

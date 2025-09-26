@@ -5,8 +5,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@repo/shadcn-ui/components/form";
-import { cn } from "@repo/shadcn-ui/lib/utils";
+} from "@/components/ui/form";
+import { cn } from "@/lib/utils";
 import clsx from "clsx";
 import { cloneElement, useState } from "react";
 

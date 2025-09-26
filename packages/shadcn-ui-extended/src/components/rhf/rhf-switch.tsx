@@ -4,9 +4,9 @@ import {
   FormField,
   FormItem,
   FormLabel,
-} from "@repo/shadcn-ui/components/form";
-import { Switch } from "@repo/shadcn-ui/components/switch";
-import { cn } from "@repo/shadcn-ui/lib/utils";
+} from "@/components/ui/form";
+import { Switch } from "@/components/ui/switch";
+import { cn } from "@/lib/utils";
 
 import type { JSX } from "react";
 import type { Control, FieldValues, Path } from "react-hook-form";

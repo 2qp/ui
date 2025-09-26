@@ -5,9 +5,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@repo/shadcn-ui/components/form";
-import { Input } from "@repo/shadcn-ui/components/input";
-import { cn } from "@repo/shadcn-ui/lib/utils";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
 import type { ComponentProps, JSX } from "react";
 import type { Control, FieldValues, Path } from "react-hook-form";

@@ -5,7 +5,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@repo/shadcn-ui/components/form";
+} from "@/components/ui/form";
 import {
   Select,
   SelectContent,
@@ -14,7 +14,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@repo/shadcn-ui/components/select";
+} from "@/components/ui/select";
 
 import type { ComponentPropsWithoutRef, JSX, ReactNode } from "react";
 import type { Control, FieldValues, Path } from "react-hook-form";
@@ -69,7 +69,7 @@ type RHFSelectProps<
 };
 
 type RHFSelectItem = {
-  id: string;
+  id?: string;
   label: string;
   leading?: ReactNode;
 } & RHFSelectItemProps;
@@ -121,7 +121,7 @@ const RHFSelect: RHFSelectType = ({
                   {group.label && <SelectLabel>{group.label}</SelectLabel>}
 
                   {group?.items?.map((data) => (
-                    <SelectItem key={data.id} {...data}>
+                    <SelectItem key={data.id || data.label} {...data}>
                       {data.label}
                     </SelectItem>
                   ))}

@@ -1,11 +1,11 @@
-import { Checkbox } from "@repo/shadcn-ui/components/checkbox";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   FormControl,
   FormDescription,
   FormField,
   FormItem,
   FormLabel,
-} from "@repo/shadcn-ui/components/form";
+} from "@/components/ui/form";
 
 import type { JSX, ReactNode } from "react";
 import type { Control, FieldValues, Path } from "react-hook-form";
