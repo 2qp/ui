@@ -9,7 +9,7 @@ import {
 import { DayButton, DayPicker, getDefaultClassNames } from "react-day-picker"
 
 import { cn } from "@repo/shadcn-ui/lib/utils"
-import { Button, buttonVariants } from "@repo/shadcn-ui/components/button"
+import { Button, buttonVariants } from "@repo/shadcn-ui/components/ui/button"
 
 function Calendar({
   className,

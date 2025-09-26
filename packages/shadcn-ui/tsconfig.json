@@ -3,8 +3,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@repo/shadcn-ui/*": ["./src/*"]
-    }
+      "@/*": ["./src/*"]
+    },
+
+    "module": "ESNext",
+    "moduleResolution": "Bundler"
   },
   "include": ["."],
   "exclude": ["node_modules", "dist"]
