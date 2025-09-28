@@ -1,4 +1,3 @@
-import { useCombo } from "@repo/shadcn-ui-extended/hooks/use-combo";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -21,14 +20,17 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useCombo } from "@/hooks/use-combo";
 import { cn } from "@/lib/utils";
 import clsx from "clsx";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import type {
   DataLifeCycle,
+  Group,
+  Item,
   RestrictKeys,
-} from "@repo/shadcn-ui-extended/hooks/use-combo";
+} from "@/hooks/use-combo";
 import type { JSX } from "react";
 import type { Control, FieldValues, Path } from "react-hook-form";
 
@@ -173,4 +175,4 @@ const RHFComboBox: RHFComboBoxType = ({
 };
 
 export { RHFComboBox };
-export type { RHFComboBoxProps, RHFComboBoxType };
+export type { DataLifeCycle, Group, Item, RHFComboBoxProps, RHFComboBoxType };
