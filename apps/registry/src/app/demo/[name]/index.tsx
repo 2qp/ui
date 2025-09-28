@@ -5,6 +5,7 @@ import type { ReactElement, ReactNode } from "react";
 // components
 import { rhfcheckbox } from "@app/demo/[name]/components/rhf-check-box";
 import { rhfcombobox } from "@app/demo/[name]/components/rhf-combo-box";
+import { rhfphone } from "@app/demo/[name]/components/rhf-phone";
 import { rhfradio } from "@app/demo/[name]/components/rhf-radio";
 import { rhfslider } from "@app/demo/[name]/components/rhf-slider";
 import { rhfswitch } from "@app/demo/[name]/components/rhf-switch";
@@ -31,6 +32,7 @@ export const demos: { [name: string]: Demo } = {
   "rhf-radio-demo": rhfradio,
   "rhf-slider-demo": rhfslider,
   "rhf-combo-box-demo": rhfcombobox,
+  "rhf-phone-demo": rhfphone,
 
   // ui
 };

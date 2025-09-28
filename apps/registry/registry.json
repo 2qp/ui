@@ -178,10 +178,30 @@
       "type": "registry:component",
       "title": "RHFComboBox",
       "description": "typed hook forms ready text field",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/use-combo.json",
+        "command",
+        "dialog",
+        "label",
+        "button",
+        "utils"
+      ],
       "files": [
         {
           "path": "@/components/rhf/rhf-combo-box.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "rhf-phone",
+      "type": "registry:component",
+      "title": "RHFPhone",
+      "description": "typed hook forms ready text field",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "@/components/rhf/rhf-phone.tsx",
           "type": "registry:component"
         }
       ]
@@ -260,6 +280,17 @@
       "files": [
         {
           "path": "src/components/rhf-combo-box.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "rhf-phone-demo",
+      "type": "registry:example",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/rhf-phone.tsx",
           "type": "registry:example"
         }
       ]
