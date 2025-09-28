@@ -36,7 +36,7 @@ type RHFComboBoxItem = {
 type RHFComboBoxGroup = {
   id: string;
   label?: string;
-  items: RHFComboBoxItem[];
+  items: RHFComboBoxItem[] | Readonly<RHFComboBoxItem[]>;
 };
 
 type DataLifeCycle = {
@@ -98,11 +98,20 @@ const useCombo: UseComboType = (props) => {
     [indexes.labelsByValue]
   );
 
-  const isSelected = (value: string, fieldValue: unknown) =>
-    fieldValue === value;
+  const isSelected = useCallback(
+    (value: string, fieldValue: unknown) => fieldValue === value,
+    []
+  );
 
   return [getSelectedLabel, isSelected];
 };
 
 export { useCombo };
-export type { DataLifeCycle, RestrictKeys, UseComboParams, UseComboType };
+export type {
+  DataLifeCycle,
+  RHFComboBoxGroup as Group,
+  RHFComboBoxItem as Item,
+  RestrictKeys,
+  UseComboParams,
+  UseComboType,
+};
