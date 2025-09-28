@@ -16,17 +16,39 @@
     "allowImportingTsExtensions": true,
     "baseUrl": ".",
     "paths": {
-      "@/components/ui/*": ["./../../packages/shadcn-ui/src/components/ui/*"],
-      "@/components/rhf/*": [
-        "./../../packages/shadcn-ui-extended/src/components/rhf/*"
+      // aliases for shadcn-ui package
+      "@/components/ui/*": [
+        "../../packages/shadcn-ui/src/components/ui/*", // primary: shadcn-ui package
+        "src/components/ui/*" // fallback: local overrides
       ],
-      "@/hooks/*": ["./../../packages/shadcn-ui-extended/src/hooks/*"],
-      "@/registry": ["registry.json"],
-      "@/app/*": ["./src/app/*"],
-      "@/components/*": ["./src/components/*"],
-      "@/lib/*": ["./src/local-lib/*"],
-      "@/local-hooks/*": ["./src/local-hooks/*"],
-      "@/docs/*": ["./src/content/docs/*"]
+      "@/lib/*": [
+        "src/local-lib/*", // primary: local utilities
+        "../../packages/shadcn-ui/src/lib/*" // fallback: shadcn-ui utilities
+      ],
+      "@/styles/*": [
+        "../../packages/shadcn-ui/src/styles/*", // shadcn-ui styles
+        "src/styles/*" // local styles
+      ],
+      "@/components/*": [
+        "src/components/*", // local components
+        "../../packages/shadcn-ui/src/components/*" // fallback: shadcn-ui components
+      ],
+      "@/hooks/*": [
+        "src/local-hooks/*", // local hooks
+        "../../packages/shadcn-ui/src/hooks/*", // shadcn-ui hooks
+        "../../packages/shadcn-ui-extended/src/hooks/*" // shadcn-ui-extended hooks
+      ],
+
+      // aliases for shadcn-ui-extended package
+      "@/components/rhf/*": [
+        "../../packages/shadcn-ui-extended/src/components/rhf/*", // shadcn-ui-extended
+        "src/components/rhf/*" // local overrides
+      ],
+
+      // registry app-specific aliases
+      "@registry": ["registry.json"],
+      "@app/*": ["src/app/*"],
+      "@docs/*": ["src/content/docs/*"]
     },
     "plugins": [
       {
