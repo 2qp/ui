@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 
-import { demos } from "@/app/demo/[name]/index";
+import { demos } from "@app/demo/[name]/index";
 
-import { Renderer } from "@/app/demo/[name]/renderer";
+import { Renderer } from "@app/demo/[name]/renderer";
 import { getRegistryItem } from "@/lib/registry";
 
 export async function generateStaticParams() {

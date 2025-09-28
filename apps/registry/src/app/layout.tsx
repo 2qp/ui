@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 
-import "@/app/globals.css";
+import "@app/globals.css";
 
 import type { Metadata } from "next";
 import type { ReactNode } from "react";

@@ -1,4 +1,4 @@
-import MinimalLayout from "@/app/demo/[name]/blocks/minimal-layout";
+import MinimalLayout from "@app/demo/[name]/blocks/minimal-layout";
 import { Toaster } from "@/components/ui/sonner";
 
 import type { ReactNode } from "react";

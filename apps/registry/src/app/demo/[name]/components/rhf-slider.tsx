@@ -1,4 +1,4 @@
-import ShellLayout from "@/app/demo/[name]/blocks/shell-layout";
+import ShellLayout from "@app/demo/[name]/blocks/shell-layout";
 import { Component } from "@/components/rhf-slider";
 
 const rhfslider = {

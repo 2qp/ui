@@ -1,4 +1,4 @@
-import registry from "@/registry";
+import registry from "@registry";
 import fs from "node:fs/promises";
 import { Project, ScriptKind } from "ts-morph";
 
