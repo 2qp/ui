@@ -1,4 +1,3 @@
-import { usePhone } from "@repo/shadcn-ui-extended/hooks/use-phone";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -22,14 +21,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { usePhone } from "@/hooks/use-phone";
 import { cn } from "@/lib/utils";
 import { ChevronsUpDown } from "lucide-react";
 import { CircleFlag } from "react-circle-flags";
 
-import type {
-  CountryCode,
-  ValidParent,
-} from "@repo/shadcn-ui-extended/hooks/use-phone";
+import type { CountryCode, ValidParent } from "@/hooks/use-phone";
 import type { ComponentProps, JSX } from "react";
 import type { Control, FieldValues, Path } from "react-hook-form";
 
