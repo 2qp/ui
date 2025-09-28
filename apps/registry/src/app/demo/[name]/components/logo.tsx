@@ -1,4 +1,4 @@
-import { Logo } from "@/local/components/logo";
+import { Logo } from "@/components/logo";
 
 export const logo = {
   name: "logo",

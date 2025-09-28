@@ -4,7 +4,7 @@ import { CheckIcon, ClipboardIcon, TerminalIcon } from "lucide-react";
 import * as React from "react";
 
 import { copyToClipboardWithMeta } from "@/components/registry/copy-button";
-import { useConfig } from "@/hooks/use-config";
+import { useConfig } from "@/local-hooks/use-config";
 import { Button } from "@/components/ui/button";
 import {
   Tabs,

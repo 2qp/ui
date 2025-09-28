@@ -1,4 +1,4 @@
-import { transformers } from "@/lib/highlight-code";
+import { transformers } from "./src/local-lib/highlight-code";
 import createMDX from "@next/mdx";
 import rehypePrettyCode from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";

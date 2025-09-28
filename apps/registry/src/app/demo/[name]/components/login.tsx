@@ -1,4 +1,4 @@
-import { Login } from "@/local/components/login";
+import { Login } from "@/components/login";
 
 export const login = {
   name: "login",
