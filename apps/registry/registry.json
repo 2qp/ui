@@ -99,36 +99,168 @@
       "name": "rhf-text-field",
       "type": "registry:component",
       "title": "RHFTextField",
-      "description": "Username & password login section with customer quote.",
-      "registryDependencies": [
-        "input",
-        "button",
-        "@registry-starter/theme",
-        "@registry-starter/logo"
-      ],
+      "description": "typed hook forms ready text field",
+      "registryDependencies": ["input", "button", "form"],
       "files": [
         {
-          "path": "src/components/rhf-text-field.tsx",
+          "path": "@/components/rhf/rhf-text-field.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "rhf-text-area",
+      "type": "registry:component",
+      "title": "RHFTextArea",
+      "description": "typed hook forms ready text field",
+      "registryDependencies": ["input", "button", "form"],
+      "files": [
+        {
+          "path": "@/components/rhf/rhf-text-area.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "rhf-check-box",
+      "type": "registry:component",
+      "title": "RHFCheckBox",
+      "description": "typed hook forms ready text field",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "@/components/rhf/rhf-check-box.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "rhf-switch",
+      "type": "registry:component",
+      "title": "RHFSwitch",
+      "description": "typed hook forms ready text field",
+      "registryDependencies": ["input", "button", "form"],
+      "files": [
+        {
+          "path": "@/components/rhf/rhf-switch.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "rhf-radio",
+      "type": "registry:component",
+      "title": "RHFRadio",
+      "description": "typed hook forms ready text field",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "@/components/rhf/rhf-radio.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "rhf-slider",
+      "type": "registry:component",
+      "title": "RHFSlider",
+      "description": "typed hook forms ready text field",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "@/components/rhf/rhf-slider.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "rhf-combo-box",
+      "type": "registry:component",
+      "title": "RHFComboBox",
+      "description": "typed hook forms ready text field",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "@/components/rhf/rhf-combo-box.tsx",
           "type": "registry:component"
         }
       ]
     },
 
     {
-      "name": "rhf-text-area",
-      "type": "registry:component",
-      "title": "RHFTextArea",
-      "description": "Username & password login section with customer quote.",
-      "registryDependencies": [
-        "badge",
-        "button",
-        "@registry-starter/theme",
-        "@registry-starter/logo"
-      ],
+      "name": "rhf-text-field-demo",
+      "type": "registry:example",
+      "registryDependencies": ["input"],
+      "files": [
+        {
+          "path": "src/components/rhf-text-field.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "rhf-text-area-demo",
+      "type": "registry:example",
+      "registryDependencies": ["input"],
       "files": [
         {
           "path": "src/components/rhf-text-area.tsx",
-          "type": "registry:component"
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "rhf-check-box-demo",
+      "type": "registry:example",
+      "registryDependencies": ["input"],
+      "files": [
+        {
+          "path": "src/components/rhf-check-box.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "rhf-switch-demo",
+      "type": "registry:example",
+      "registryDependencies": ["input"],
+      "files": [
+        {
+          "path": "src/components/rhf-switch.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "rhf-radio-demo",
+      "type": "registry:example",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/rhf-radio.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "rhf-slider-demo",
+      "type": "registry:example",
+      "registryDependencies": ["input"],
+      "files": [
+        {
+          "path": "src/components/rhf-slider.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "rhf-combo-box-demo",
+      "type": "registry:example",
+      "registryDependencies": ["input"],
+      "files": [
+        {
+          "path": "src/components/rhf-combo-box.tsx",
+          "type": "registry:example"
         }
       ]
     }
