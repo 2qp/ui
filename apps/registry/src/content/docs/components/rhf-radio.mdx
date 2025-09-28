@@ -1,16 +1,14 @@
 export const metadata = {
-  title: "RHFTextField",
-  description:
-    "Displays a form input field or a component that looks like an input field.",
+  title: "RHFTextArea",
+  description: "",
   date: "2023-10-01",
   component: true,
 };
 
 <ComponentPreview
-  name="rhf-text-field-demo"
+  name="rhf-radio-demo"
   className="[&_input]:max-w-xs"
   description="A form input component."
-  type="example"
 />
 
 ## Installation
@@ -24,7 +22,7 @@ export const metadata = {
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add rhf-text-field
+npx shadcn@latest add input
 ```
 
 </TabsContent>
@@ -36,8 +34,8 @@ npx shadcn@latest add rhf-text-field
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource
-  src="@/components/rhf/rhf-text-field.tsx"
-  title="components/rhf/rhf-text-field.tsx"
+  src="@/components/rhf/rhf-radio.tsx"
+  title="components/rhf/rhf-radio.tsx"
 />
 
 <Step>Update the import paths to match your project setup.</Step>
@@ -51,13 +49,13 @@ npx shadcn@latest add rhf-text-field
 ## Usage
 
 ```tsx
-import { RHFTextField } from "@/components/rhf/rhf-text-field";
+import { RHFTextArea } from "@/components/rhf/rhf-radio";
 ```
 
 ```tsx
 <Form {...form}>
   <form onSubmit={form.handleSubmit(onSubmit)}>
-    <RHFTextField
+    <RHFTextArea
       control={form.control}
       name="text"
       label="Name"
