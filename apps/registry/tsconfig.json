@@ -16,17 +16,17 @@
     "allowImportingTsExtensions": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/registry": ["./registry.json"],
-      "@/components/ui/*": ["./../../packages/shadcn-ui/src/components/*"],
-      "@/local/components/*": ["./src/components/*"],
+      "@/components/ui/*": ["./../../packages/shadcn-ui/src/components/ui/*"],
       "@/components/rhf/*": [
         "./../../packages/shadcn-ui-extended/src/components/rhf/*"
       ],
-      "#utils/*": ["./src/lib/*"]
-
-      // "#shared/*": ["node_modules/@repo/shadcn-ui-extended/src/*"],
-      // "#/*": ["./src/*"]
+      "@/hooks/*": ["./../../packages/shadcn-ui-extended/src/hooks/*"],
+      "@/registry": ["registry.json"],
+      "@/app/*": ["./src/app/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/lib/*": ["./src/local-lib/*"],
+      "@/local-hooks/*": ["./src/local-hooks/*"],
+      "@/docs/*": ["./src/content/docs/*"]
     },
     "plugins": [
       {
@@ -35,6 +35,12 @@
     ],
     "target": "ES2017"
   },
-  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "scripts/**/*"
+  ],
   "exclude": ["node_modules"]
 }
