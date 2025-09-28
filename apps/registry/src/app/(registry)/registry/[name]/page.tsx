@@ -24,7 +24,7 @@ export default async function RegistryItemPage({
 
   try {
     const { default: Post, metadata } = await import(
-      `@/content/docs/components/${name}.mdx`
+      `@/docs/components/${name}.mdx`
     );
 
     return (
