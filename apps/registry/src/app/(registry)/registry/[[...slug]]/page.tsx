@@ -3,29 +3,36 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { getRegistryItems } from "@/lib/registry.server";
+import { source } from "@/lib/source";
+import { COMPONENTS } from "mdx-components";
 
+export const revalidate = false;
 export const dynamic = "force-static";
+export const dynamicParams = false;
 
-export async function generateStaticParams() {
-  const components = getRegistryItems();
+export function generateStaticParams() {
+  const params = source.generateParams();
 
-  return components.map(({ name }) => ({
-    name,
-  }));
+  return params;
 }
 
 export default async function RegistryItemPage({
   params,
 }: {
-  params: Promise<{ name: string }>;
+  params: Promise<{ slug: string[] }>;
 }) {
-  const { name } = await params;
-
   try {
-    const { default: Post, metadata } = await import(
-      `@docs/components/${name}.mdx`
-    );
+    const { slug } = await params;
+
+    const page = source.getPage(slug);
+
+    if (!page) {
+      notFound();
+    }
+
+    const doc = page?.data;
+
+    const MDX = doc.body;
 
     return (
       <div className="container p-5 md:p-10">
@@ -37,13 +44,11 @@ export default async function RegistryItemPage({
                 Back to Home
               </Link>
             </Button>
-            <h1 className="font-bold text-3xl tracking-tight">
-              {metadata?.title}
-            </h1>
+            <h1 className="font-bold text-3xl tracking-tight">{doc.title}</h1>
           </div>
         </div>
 
-        <Post />
+        <MDX components={COMPONENTS} />
       </div>
     );
   } catch (err) {

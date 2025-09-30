@@ -3,13 +3,16 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "npm run registry:build && next dev --turbopack",
-    "dev-no-tp": "npm run registry:build && next dev",
-    "build": "npm run registry:build && next build",
+    "dev": "npm run registry:buildexp && next dev --turbopack",
+    "dev-no-tp": "npm run registry:buildexp && next dev",
+    "build": "npm run registry:buildexp && next build",
     "start": "next start",
     "lint": "biome check",
     "lint:fix": "biome check --write",
-    "registry:build": "npx shadcn@latest build"
+    "registry:build": "shadcn build",
+    "registry:buildr": "my-shadcn-cli build --path-resolver ./scripts/resolver.js",
+    "registry:buildexp": "shadcn registry:build",
+    "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -35,7 +38,7 @@
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
     "vaul": "^1.1.2",
-    "zod": "^3.25.76"
+    "zod": "^4.1.11"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
@@ -55,8 +58,11 @@
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react-swc": "^3.11.0",
+    "fumadocs-core": "^15.8.1",
+    "fumadocs-mdx": "^12.0.1",
     "jsdom": "^25.0.1",
     "json5": "^2.2.3",
+    "libphonenumber-js": "^1.12.18",
     "postcss": "^8.5.6",
     "rehype-pretty-code": "^0.14.1",
     "remark-gfm": "^4.0.1",
@@ -76,6 +82,6 @@
     "react-is": "^19.0.0-rc-69d4b800-20241021"
   },
   "imports": {
-    "#utils/*": "./src/lib/*"
+    "#/content/*": "./src/content/*"
   }
 }

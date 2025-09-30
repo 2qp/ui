@@ -1,8 +1,6 @@
-import { transformers } from "./src/local-lib/highlight-code";
-import createMDX from "@next/mdx";
-import rehypePrettyCode from "rehype-pretty-code";
-import remarkGfm from "remark-gfm";
+import { createMDX } from "fumadocs-mdx/next";
 import { TsconfigPathsPlugin } from "tsconfig-paths-webpack-plugin";
+import { transformers } from "./src/local-lib/highlight-code";
 
 import type { NextConfig } from "next";
 import type { Options } from "rehype-pretty-code";
@@ -35,6 +33,21 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: "/docs/components/:name",
+        destination: "/registry/components/:name",
+        permanent: true,
+      },
+
+      {
+        source: "/registry/:name",
+        destination: "/registry/components/:name",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 const options: Options = {
@@ -46,13 +59,13 @@ const options: Options = {
   theme: "andromeeda",
 };
 
-const withMDX = createMDX({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [[rehypePrettyCode, options]],
-  },
-});
+// const withMDX = createMDX({
+//   extension: /\.mdx?$/,
+//   options: {
+//     remarkPlugins: [remarkGfm],
+//     rehypePlugins: [[rehypePrettyCode, options]],
+//   },
+// });
 
 // const withMDX = createMDX({
 //   options: {
@@ -75,5 +88,7 @@ const withMDX = createMDX({
 //     ],
 //   },
 // });
+
+const withMDX = createMDX({});
 
 export default withMDX(nextConfig);
