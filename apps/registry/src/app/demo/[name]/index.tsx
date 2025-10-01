@@ -7,6 +7,7 @@ import { rhfcheckbox } from "@app/demo/[name]/components/rhf-check-box";
 import { rhfcombobox } from "@app/demo/[name]/components/rhf-combo-box";
 import { rhfdate } from "@app/demo/[name]/components/rhf-date";
 import { rhfdatetime } from "@app/demo/[name]/components/rhf-date-time";
+import { rhfotp } from "@app/demo/[name]/components/rhf-otp";
 import { rhfphone } from "@app/demo/[name]/components/rhf-phone";
 import { rhfradio } from "@app/demo/[name]/components/rhf-radio";
 import { rhfselect } from "@app/demo/[name]/components/rhf-select";
@@ -41,6 +42,7 @@ export const demos: { [name: string]: Demo } = {
   "rhf-time-demo": rhftime,
   "rhf-date-time-demo": rhfdatetime,
   "rhf-select-demo": rhfselect,
+  "rhf-otp-demo": rhfotp,
 
   // ui
 } as const;

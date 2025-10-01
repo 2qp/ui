@@ -258,6 +258,19 @@
         }
       ]
     },
+    {
+      "name": "rhf-otp",
+      "type": "registry:component",
+      "title": "RHFOTP",
+      "description": "typed hook forms ready text field",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "@/components/rhf/rhf-otp.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
 
     {
       "name": "rhf-text-field-demo",
@@ -387,6 +400,17 @@
       "files": [
         {
           "path": "src/components/rhf-select.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "rhf-otp-demo",
+      "type": "registry:example",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/rhf-otp.tsx",
           "type": "registry:example"
         }
       ]
