@@ -10,6 +10,7 @@ import { rhfdatetime } from "@app/demo/[name]/components/rhf-date-time";
 import { rhfotp } from "@app/demo/[name]/components/rhf-otp";
 import { rhfphone } from "@app/demo/[name]/components/rhf-phone";
 import { rhfradio } from "@app/demo/[name]/components/rhf-radio";
+import { rhfrate } from "@app/demo/[name]/components/rhf-rate";
 import { rhfselect } from "@app/demo/[name]/components/rhf-select";
 import { rhfslider } from "@app/demo/[name]/components/rhf-slider";
 import { rhfswitch } from "@app/demo/[name]/components/rhf-switch";
@@ -43,6 +44,7 @@ export const demos: { [name: string]: Demo } = {
   "rhf-date-time-demo": rhfdatetime,
   "rhf-select-demo": rhfselect,
   "rhf-otp-demo": rhfotp,
+  "rhf-rate-demo": rhfrate,
 
   // ui
 } as const;

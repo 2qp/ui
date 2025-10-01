@@ -271,6 +271,19 @@
         }
       ]
     },
+    {
+      "name": "rhf-rate",
+      "type": "registry:component",
+      "title": "RHFRate",
+      "description": "typed hook forms ready text field",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "@/components/rhf/rhf-rate.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
 
     {
       "name": "rhf-text-field-demo",
@@ -411,6 +424,17 @@
       "files": [
         {
           "path": "src/components/rhf-otp.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "rhf-rate-demo",
+      "type": "registry:example",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/rhf-rate.tsx",
           "type": "registry:example"
         }
       ]
