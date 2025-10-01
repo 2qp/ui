@@ -1,15 +1,15 @@
 "use client";
 
-import type { Component } from "@/lib/registry";
+import type { ReactNode } from "react";
 
 interface ComponentCardProps {
-  component: Component;
+  children?: ReactNode;
   baseUrl: string;
   prompt: string;
 }
 
 export function ComponentCard({
-  component,
+  children,
   baseUrl,
   prompt,
 }: ComponentCardProps) {
@@ -31,12 +31,13 @@ export function ComponentCard({
   return (
     <section className="h-full w-full">
       <div className="h-full w-full p-4">
-        <iframe
+        {/* <iframe
           id="iframe"
           src={`/demo/${component.name}`}
           className="h-full w-full"
           title="Page Preview"
-        />
+        /> */}
+        {children}
       </div>
     </section>
   );
