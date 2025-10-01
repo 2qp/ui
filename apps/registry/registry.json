@@ -206,6 +206,19 @@
         }
       ]
     },
+    {
+      "name": "rhf-date",
+      "type": "registry:component",
+      "title": "RHFDate",
+      "description": "typed hook forms ready text field",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "@/components/rhf/rhf-date.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
 
     {
       "name": "rhf-text-field-demo",
@@ -291,6 +304,17 @@
       "files": [
         {
           "path": "src/components/rhf-phone.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "rhf-date-demo",
+      "type": "registry:example",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/rhf-date.tsx",
           "type": "registry:example"
         }
       ]

@@ -1,0 +1,66 @@
+---
+title: RHF Combo Box
+description: A Combo Box component for React Hook Form
+---
+
+<ComponentPreview
+  name="rhf-date-demo"
+  className="[&_input]:max-w-xs"
+  description="A form input component."
+/>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add input
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  src="@/components/rhf/rhf-date.tsx"
+  title="components/rhf/rhf-date.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { RHFTextArea } from "@/components/rhf/rhf-date";
+```
+
+```tsx
+<Form {...form}>
+  <form onSubmit={form.handleSubmit(onSubmit)}>
+    <RHFTextArea
+      control={form.control}
+      name="text"
+      label="Name"
+      description="something..."
+    />
+  </form>
+</Form>
+```
+
+## Changelog
