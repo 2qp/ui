@@ -13,7 +13,7 @@ export default function ShellLayout({
       <main className="flex w-full justify-center">
         <div className="container">{children}</div>
       </main>
-      <Toaster />
+      {/* <Toaster /> */}
     </MinimalLayout>
   );
 }
