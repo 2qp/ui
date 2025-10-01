@@ -5,6 +5,7 @@ import type { ReactElement, ReactNode } from "react";
 // components
 import { rhfcheckbox } from "@app/demo/[name]/components/rhf-check-box";
 import { rhfcombobox } from "@app/demo/[name]/components/rhf-combo-box";
+import { rhfdate } from "@app/demo/[name]/components/rhf-date";
 import { rhfphone } from "@app/demo/[name]/components/rhf-phone";
 import { rhfradio } from "@app/demo/[name]/components/rhf-radio";
 import { rhfslider } from "@app/demo/[name]/components/rhf-slider";
@@ -33,6 +34,16 @@ export const demos: { [name: string]: Demo } = {
   "rhf-slider-demo": rhfslider,
   "rhf-combo-box-demo": rhfcombobox,
   "rhf-phone-demo": rhfphone,
+  "rhf-date-demo": rhfdate,
 
   // ui
+} as const;
+
+type DemoName = keyof typeof demos; // { [name: string]: Demo } this overriding literals
+
+const getDemoComponents = (name: DemoName | (string & {})) => {
+  const demo = demos[name as DemoName];
+  return demo?.components || {};
 };
+
+export { getDemoComponents };

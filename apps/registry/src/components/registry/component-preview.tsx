@@ -4,6 +4,8 @@ import { ComponentPreviewTabs } from "@/components/registry/component-preview-ta
 import { ComponentSource } from "@/components/registry/component-source";
 import { getRegistryItem } from "@/lib/registry";
 import { getPrompt } from "@/lib/utils";
+import { getDemoComponents } from "@app/demo/[name]";
+import { Renderer } from "@app/demo/[name]/renderer";
 import { ComponentCard } from "./component-card";
 
 export function ComponentPreview({
@@ -21,6 +23,8 @@ export function ComponentPreview({
   type?: "block" | "component" | "example";
 }) {
   const component = getRegistryItem(name);
+
+  const components = getDemoComponents(name);
 
   if (!component) {
     return (
@@ -65,10 +69,18 @@ export function ComponentPreview({
       hideCode={hideCode}
       component={
         <ComponentCard
-          component={component}
           baseUrl={process.env.VERCEL_PROJECT_PRODUCTION_URL ?? ""}
           prompt={getPrompt()}
-        />
+        >
+          <div className="flex w-full flex-col gap-4">
+            {components &&
+              Object.entries(components).map(([key, node]) => (
+                <div className="relative w-full" key={key}>
+                  <Renderer>{node}</Renderer>
+                </div>
+              ))}
+          </div>
+        </ComponentCard>
       }
       source={<ComponentSource name={name} collapsible={false} />}
       {...props}

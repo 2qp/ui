@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 
-import { demos } from "@app/demo/[name]/index";
+import { demos, getDemoComponents } from "@app/demo/[name]/index";
 
-import { Renderer } from "@app/demo/[name]/renderer";
 import { getRegistryItem } from "@/lib/registry";
+import { Renderer } from "@app/demo/[name]/renderer";
 
 export async function generateStaticParams() {
   return Object.keys(demos).map((name) => ({
@@ -24,15 +24,13 @@ export default async function DemoPage({
     notFound();
   }
 
-  // @ts-ignore
-  const { components } = demos[name];
+  const components = getDemoComponents(name);
 
   return (
-    <div className="flex h-[100vh w-full flex-col gap-4">
+    <div className="flex w-full flex-col gap-4">
       {components &&
         Object.entries(components).map(([key, node]) => (
           <div className="relative w-full" key={key}>
-            {/* @ts-ignore */}
             <Renderer>{node}</Renderer>
           </div>
         ))}
