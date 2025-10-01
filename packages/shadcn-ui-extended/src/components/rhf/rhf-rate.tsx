@@ -40,7 +40,7 @@ type RHFRateProps<T extends FieldValues> = {
   name: Path<T>;
 
   type?: "rate" | "mood";
-  items: RHFRateDataPoint[];
+  items: RHFRateDataPoint[] | ReadonlyArray<RHFRateDataPoint>;
 
   label?: string;
   description?: string;
