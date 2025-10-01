@@ -245,6 +245,19 @@
         }
       ]
     },
+    {
+      "name": "rhf-select",
+      "type": "registry:component",
+      "title": "RHFSelect",
+      "description": "typed hook forms ready text field",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "@/components/rhf/rhf-select.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
 
     {
       "name": "rhf-text-field-demo",
@@ -356,7 +369,6 @@
         }
       ]
     },
-
     {
       "name": "rhf-date-time-demo",
       "type": "registry:example",
@@ -364,6 +376,17 @@
       "files": [
         {
           "path": "src/components/rhf-date-time.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "rhf-select-demo",
+      "type": "registry:example",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/rhf-select.tsx",
           "type": "registry:example"
         }
       ]
