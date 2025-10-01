@@ -219,6 +219,32 @@
         }
       ]
     },
+    {
+      "name": "rhf-time",
+      "type": "registry:component",
+      "title": "RHFTime",
+      "description": "typed hook forms ready text field",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "@/components/rhf/rhf-time.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "rhf-date-time",
+      "type": "registry:component",
+      "title": "RHFDateTime",
+      "description": "typed hook forms ready text field",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "@/components/rhf/rhf-date-time.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
 
     {
       "name": "rhf-text-field-demo",
@@ -315,6 +341,29 @@
       "files": [
         {
           "path": "src/components/rhf-date.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "rhf-time-demo",
+      "type": "registry:example",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/rhf-time.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+
+    {
+      "name": "rhf-date-time-demo",
+      "type": "registry:example",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/rhf-date-time.tsx",
           "type": "registry:example"
         }
       ]

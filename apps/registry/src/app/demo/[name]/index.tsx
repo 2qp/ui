@@ -6,12 +6,14 @@ import type { ReactElement, ReactNode } from "react";
 import { rhfcheckbox } from "@app/demo/[name]/components/rhf-check-box";
 import { rhfcombobox } from "@app/demo/[name]/components/rhf-combo-box";
 import { rhfdate } from "@app/demo/[name]/components/rhf-date";
+import { rhfdatetime } from "@app/demo/[name]/components/rhf-date-time";
 import { rhfphone } from "@app/demo/[name]/components/rhf-phone";
 import { rhfradio } from "@app/demo/[name]/components/rhf-radio";
 import { rhfslider } from "@app/demo/[name]/components/rhf-slider";
 import { rhfswitch } from "@app/demo/[name]/components/rhf-switch";
 import { rhftextarea } from "@app/demo/[name]/components/rhf-text-area";
 import { rhftextfield } from "@app/demo/[name]/components/rhf-text-field";
+import { rhftime } from "@app/demo/[name]/components/rhf-time";
 
 // ui
 
@@ -35,6 +37,8 @@ export const demos: { [name: string]: Demo } = {
   "rhf-combo-box-demo": rhfcombobox,
   "rhf-phone-demo": rhfphone,
   "rhf-date-demo": rhfdate,
+  "rhf-time-demo": rhftime,
+  "rhf-date-time-demo": rhfdatetime,
 
   // ui
 } as const;
