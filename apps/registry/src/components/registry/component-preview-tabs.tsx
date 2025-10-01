@@ -1,9 +1,8 @@
 "use client";
 
-import * as React from "react";
-
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+import * as React from "react";
 
 export function ComponentPreviewTabs({
   className,
@@ -49,30 +48,39 @@ export function ComponentPreviewTabs({
           )}
         </div>
       </Tabs>
-      <div
-        data-tab={tab}
-        className="data-[tab=code]:border-code relative rounded-lg border md:-mx-1"
-      >
+
+      <div className="relative h-[450px] rounded-lg border overflow-hidden md:-mx-1">
         <div
           data-slot="preview"
           data-active={tab === "preview"}
-          className="invisible data-[active=true]:visible"
+          className={cn(
+            "absolute inset-0 transition-opacity duration-75 ease-in-out",
+            tab === "preview" ? "opacity-100 visible" : "opacity-0 invisible"
+          )}
         >
           <div
             data-align={align}
             className={cn(
-              "preview flex h-[450px] w-full justify-center data-[align=center]:items-center data-[align=end]:items-end data-[align=start]:items-start"
+              "preview flex h-full w-full justify-center",
+              "data-[align=center]:items-center",
+              "data-[align=start]:items-start",
+              "data-[align=end]:items-end"
             )}
           >
             {component}
           </div>
         </div>
+
         <div
           data-slot="code"
           data-active={tab === "code"}
-          className=" absolute inset-0 hidden overflow-hidden data-[active=true]:block **:[figure]:!m-0 **:[pre]:h-[450px]"
+          className={cn(
+            "absolute inset-0 transition-opacity duration-75 ease-in-out overflow-hidden",
+            tab === "code" ? "opacity-100 visible" : "opacity-0 invisible",
+            "**:[figure]:!m-0 **:[pre]:h-[450px]"
+          )}
         >
-          {source}
+          <div className="h-full w-full">{source}</div>
         </div>
       </div>
     </div>
