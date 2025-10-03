@@ -9,6 +9,8 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
 
+import type { CountryCode } from "libphonenumber-js";
+
 const phoneSchema = z
   .object({
     country: z.string().optional(), // e.g., 'US'
@@ -18,13 +20,13 @@ const phoneSchema = z
     const { country, number } = data;
 
     const isValid = isValidPhoneNumber(number, {
-      defaultCountry: country as any,
+      defaultCountry: country as CountryCode,
     });
 
     if (!isValid) {
       ctx.addIssue({
         // path: ["number"],
-        code: z.ZodIssueCode.custom,
+        code: "custom",
         message: `Invalid ${country || ""} phone number`,
       });
     }
