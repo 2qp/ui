@@ -38,6 +38,9 @@
         "../../packages/shadcn-ui/src/hooks/*", // shadcn-ui hooks
         "../../packages/shadcn-ui-extended/src/hooks/*" // shadcn-ui-extended hooks
       ],
+      "@/constants/*": [
+        "../../packages/shadcn-ui-extended/src/constants/*" // shadcn-ui-extended constants
+      ],
 
       // aliases for shadcn-ui-extended package
       "@/components/rhf/*": [
