@@ -38,6 +38,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { getBlocks, getComponents, getUIPrimitives } from "@/lib/registry";
+import { APP_ROUTES } from "constants/app-routes";
 
 const uiItems = getUIPrimitives();
 const componentItems = getComponents();
@@ -74,18 +75,18 @@ export function RegistrySidebar() {
     if (searchTerm) {
       setFilteredUiItems(
         uiItems.filter((item) =>
-          item.title.toLowerCase().includes(searchTerm.toLowerCase()),
-        ),
+          item.title.toLowerCase().includes(searchTerm.toLowerCase())
+        )
       );
       setFilteredComponents(
         componentItems.filter((item) =>
-          item.title.toLowerCase().includes(searchTerm.toLowerCase()),
-        ),
+          item.title.toLowerCase().includes(searchTerm.toLowerCase())
+        )
       );
       setFilteredBlocks(
         blockItems.filter((item) =>
-          item.title.toLowerCase().includes(searchTerm.toLowerCase()),
-        ),
+          item.title.toLowerCase().includes(searchTerm.toLowerCase())
+        )
       );
     } else {
       setFilteredUiItems(uiItems);
@@ -227,7 +228,7 @@ export function RegistrySidebar() {
                         >
                           <Link
                             onClick={() => setOpenMobile(false)}
-                            href={`/registry/${item.name}`}
+                            href={APP_ROUTES.REGISTRY.GET_BY_NAME(item.name)}
                           >
                             {item.title}
                           </Link>

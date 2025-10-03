@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getBlocks, getComponents, getUIPrimitives } from "@/lib/registry";
+import { APP_ROUTES } from "constants/app-routes";
 
 const uiItems = getUIPrimitives().slice(0, 5);
 const componentItems = getComponents().slice(0, 5);
@@ -118,7 +119,7 @@ export default function Home() {
                   className="flex items-center justify-between"
                 >
                   <Link
-                    href={`/registry/${item.name}`}
+                    href={APP_ROUTES.REGISTRY.GET_BY_NAME(item.name)}
                     className="text-sm hover:underline"
                   >
                     {item.title}
