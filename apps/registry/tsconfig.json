@@ -23,7 +23,8 @@
       ],
       "@/lib/*": [
         "src/local-lib/*", // primary: local utilities
-        "../../packages/shadcn-ui/src/lib/*" // fallback: shadcn-ui utilities
+        "../../packages/shadcn-ui/src/lib/*", // fallback: shadcn-ui utilities
+        "../../packages/shadcn-ui-extended/src/lib/*" // shadcn-ui-extended utilities
       ],
       "@/styles/*": [
         "../../packages/shadcn-ui/src/styles/*", // shadcn-ui styles
