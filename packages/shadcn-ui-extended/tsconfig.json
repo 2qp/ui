@@ -4,7 +4,7 @@
     "baseUrl": "src/",
     "paths": {
       "@/components/ui/*": ["../../shadcn-ui/src/components/ui/*"],
-      "@/lib/*": ["../../shadcn-ui/src/lib/*"],
+      "@/lib/*": ["../../shadcn-ui/src/lib/*", "./lib/*"],
       "@/hooks/*": ["./hooks/*"],
       "@/constants/*": ["./constants/*"]
     },
