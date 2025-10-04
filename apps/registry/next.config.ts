@@ -8,6 +8,8 @@ import type { Options } from "rehype-pretty-code";
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   //
+  output: "export",
+  trailingSlash: true,
 
   webpack(config, { isServer }) {
     config.externals = config.externals || [];
@@ -33,21 +35,21 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  async redirects() {
-    return [
-      {
-        source: "/docs/components/:name",
-        destination: "/registry/components/:name",
-        permanent: true,
-      },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: "/docs/components/:name",
+  //       destination: "/registry/components/:name",
+  //       permanent: true,
+  //     },
 
-      {
-        source: "/registry/:name",
-        destination: "/registry/components/:name",
-        permanent: false,
-      },
-    ];
-  },
+  //     {
+  //       source: "/registry/:name",
+  //       destination: "/registry/components/:name",
+  //       permanent: false,
+  //     },
+  //   ];
+  // },
 };
 
 const options: Options = {
