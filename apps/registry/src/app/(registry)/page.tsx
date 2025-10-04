@@ -9,8 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { APP_ROUTES } from "@/constants/app-routes";
 import { getBlocks, getComponents, getUIPrimitives } from "@/lib/registry";
-import { APP_ROUTES } from "constants/app-routes";
 
 const uiItems = getUIPrimitives().slice(0, 5);
 const componentItems = getComponents().slice(0, 5);

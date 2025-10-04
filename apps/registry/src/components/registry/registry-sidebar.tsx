@@ -37,8 +37,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { APP_ROUTES } from "@/constants/app-routes";
 import { getBlocks, getComponents, getUIPrimitives } from "@/lib/registry";
-import { APP_ROUTES } from "constants/app-routes";
 
 const uiItems = getUIPrimitives();
 const componentItems = getComponents();

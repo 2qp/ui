@@ -39,7 +39,8 @@
         "../../packages/shadcn-ui-extended/src/hooks/*" // shadcn-ui-extended hooks
       ],
       "@/constants/*": [
-        "../../packages/shadcn-ui-extended/src/constants/*" // shadcn-ui-extended constants
+        "../../packages/shadcn-ui-extended/src/constants/*", // shadcn-ui-extended constants
+        "src/constants/*"
       ],
 
       // aliases for shadcn-ui-extended package
@@ -51,7 +52,8 @@
       // registry app-specific aliases
       "@registry": ["registry.json"],
       "@app/*": ["src/app/*"],
-      "@docs/*": ["src/content/docs/*"]
+      "@docs/*": ["src/content/docs/*"],
+      "@providers/*": ["src/providers/*"]
     },
     "plugins": [
       {

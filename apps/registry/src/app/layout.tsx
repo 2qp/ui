@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 
-import { Providers } from "providers/providers";
+import { Providers } from "@providers/providers";
 
 import "@app/globals.css";
 
