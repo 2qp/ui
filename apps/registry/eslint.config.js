@@ -8,7 +8,7 @@ export default [
       semi: ["error", "always"],
       quotes: ["error", "double"],
       // "comma-dangle": ["error", "always-multiline"],
-      "no-unused-vars": "warn",
+      // "no-unused-vars": "warn",
       "no-console": ["warn", { allow: ["warn", "error"] }],
       "react/jsx-uses-react": "off",
       "react/jsx-indent": ["error", 2],
