@@ -5,7 +5,7 @@ import parsePhoneNumberFromString, {
 } from "libphonenumber-js";
 import { useCallback, useMemo } from "react";
 
-import { PRIORITIZED_PHONE_CODES } from "@/constants/prioritized-phone-codes";
+import { PRIORITIZED_PHONE_CODES } from "@/lib/prioritized-phone-codes";
 
 import type { CountryCode } from "libphonenumber-js";
 
