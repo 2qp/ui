@@ -1,40 +1,24 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
-import { useEffect, useState } from "react";
-
 import { Button } from "@/components/ui/button";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export function ModeToggle() {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    setIsDark(document.documentElement.classList.contains("dark"));
-  }, []);
+  const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
-    const newTheme = !isDark;
-    setIsDark(newTheme);
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
 
-    const themeStr = newTheme ? "dark" : "light";
-
-    if (newTheme) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-
-    // change theme inside iframe
+    // Change theme inside iframe
     const iframe = document.getElementById(
-      "iframe",
+      "iframe"
     ) as HTMLIFrameElement | null;
-
     if (iframe?.contentWindow) {
       iframe.contentWindow.postMessage(
-        { type: "theme", theme: themeStr },
-        window.location.origin,
+        { type: "theme", theme: newTheme },
+        window.location.origin
       );
     }
   };

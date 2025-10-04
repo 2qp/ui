@@ -1,6 +1,8 @@
 import { cn } from "@/lib/utils";
 import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 
+import { Providers } from "providers/providers";
+
 import "@app/globals.css";
 
 import type { Metadata } from "next";
@@ -35,6 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={cn(
         GeistSans.variable,
         GeistMono.variable,
@@ -47,7 +50,7 @@ export default function RootLayout({
         content="noindex, nofollow, noarchive, nosnippet, noimageindex"
       />
       <body className="flex grow">
-        {children}
+        <Providers>{children}</Providers>
         {/* <Analytics />
         <SpeedInsights /> */}
       </body>
