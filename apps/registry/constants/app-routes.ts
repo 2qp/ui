@@ -1,4 +1,4 @@
-const APP_ROUTES_BASE = "/";
+const APP_ROUTES_BASE = "";
 
 const APP_ROUTES = {
   REGISTRY: {
