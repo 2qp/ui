@@ -1,8 +1,29 @@
 "use client";
 
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+import { cva } from "class-variance-authority";
 import * as React from "react";
+
+import type { VariantProps } from "class-variance-authority";
+
+const previewTabsVariants = cva("", {
+  variants: {
+    height: {
+      sm: "h-[300px]",
+      md: "h-[500px]",
+      lg: "h-[600px]",
+      custom: "",
+      default: "h-[450px]",
+    },
+  },
+  defaultVariants: {
+    height: "default",
+  },
+});
+
+type PrevieTabswVariants = VariantProps<typeof previewTabsVariants>;
 
 export function ComponentPreviewTabs({
   className,
@@ -10,13 +31,15 @@ export function ComponentPreviewTabs({
   hideCode = false,
   component,
   source,
+  height,
+
   ...props
 }: React.ComponentProps<"div"> & {
   align?: "center" | "start" | "end";
   hideCode?: boolean;
   component: React.ReactNode;
   source: React.ReactNode;
-}) {
+} & PrevieTabswVariants) {
   const [tab, setTab] = React.useState("preview");
 
   return (
@@ -49,7 +72,12 @@ export function ComponentPreviewTabs({
         </div>
       </Tabs>
 
-      <div className="relative h-[450px] rounded-lg border overflow-hidden md:-mx-1">
+      <div
+        className={cn(
+          "relative rounded-lg border overflow-hidden md:-mx-1",
+          previewTabsVariants({ height })
+        )}
+      >
         <div
           data-slot="preview"
           data-active={tab === "preview"}
@@ -73,16 +101,20 @@ export function ComponentPreviewTabs({
 
         <div
           data-slot="code"
-          data-active={tab === "code"}
           className={cn(
-            "absolute inset-0 transition-opacity duration-75 ease-in-out overflow-hidden",
+            "absolute inset-0 transition-opacity duration-75 ease-in-out",
             tab === "code" ? "opacity-100 visible" : "opacity-0 invisible",
-            "**:[figure]:!m-0 **:[pre]:h-[450px]"
+            "**:[figure]:!m-0"
           )}
         >
-          <div className="h-full w-full">{source}</div>
+          <ScrollArea className={cn("w-full", previewTabsVariants({ height }))}>
+            <div className="p-4">{source}</div>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
         </div>
       </div>
     </div>
   );
 }
+
+export type { PrevieTabswVariants };

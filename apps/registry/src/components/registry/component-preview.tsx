@@ -8,6 +8,8 @@ import { getDemoComponents } from "@app/demo/[name]";
 import { Renderer } from "@app/demo/[name]/renderer";
 import { ComponentCard } from "./component-card";
 
+import type { PrevieTabswVariants } from "@/components/registry/component-preview-tabs";
+
 export function ComponentPreview({
   name,
   type,
@@ -21,7 +23,7 @@ export function ComponentPreview({
   description?: string;
   hideCode?: boolean;
   type?: "block" | "component" | "example";
-}) {
+} & PrevieTabswVariants) {
   const component = getRegistryItem(name);
 
   const components = getDemoComponents(name);
