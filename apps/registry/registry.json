@@ -198,7 +198,7 @@
       "type": "registry:component",
       "title": "RHFPhone",
       "description": "typed hook forms ready text field",
-      "registryDependencies": [],
+      "registryDependencies": ["http://localhost:3000/r/use-phone.json"],
       "files": [
         {
           "path": "@/components/rhf/rhf-phone.tsx",
@@ -281,6 +281,61 @@
         {
           "path": "@/components/rhf/rhf-rate.tsx",
           "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "rhf-sign",
+      "type": "registry:component",
+      "title": "RHFSign",
+      "description": "typed hook forms ready text field",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "@/components/rhf/rhf-sign.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+
+    {
+      "name": "use-combo",
+      "type": "registry:file",
+      "title": "use-combo",
+      "description": "",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "@/hooks/use-combo.ts",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "use-phone",
+      "type": "registry:file",
+      "title": "use-phone",
+      "description": "",
+      "registryDependencies": [
+        "http://localhost:3000/r/prioritized-phone-codes.json"
+      ],
+      "files": [
+        {
+          "path": "@/hooks/use-phone.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "prioritized-phone-codes",
+      "type": "registry:lib",
+      "title": "prioritized-phone-codes",
+      "description": "",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "@/lib/prioritized-phone-codes.ts",
+          "type": "registry:lib"
         }
       ]
     },
@@ -435,6 +490,17 @@
       "files": [
         {
           "path": "src/components/rhf-rate.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "rhf-sign-demo",
+      "type": "registry:example",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/rhf-sign.tsx",
           "type": "registry:example"
         }
       ]

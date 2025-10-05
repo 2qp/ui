@@ -12,6 +12,7 @@ import { rhfphone } from "@app/demo/[name]/components/rhf-phone";
 import { rhfradio } from "@app/demo/[name]/components/rhf-radio";
 import { rhfrate } from "@app/demo/[name]/components/rhf-rate";
 import { rhfselect } from "@app/demo/[name]/components/rhf-select";
+import { rhfsign } from "@app/demo/[name]/components/rhf-sign";
 import { rhfslider } from "@app/demo/[name]/components/rhf-slider";
 import { rhfswitch } from "@app/demo/[name]/components/rhf-switch";
 import { rhftextarea } from "@app/demo/[name]/components/rhf-text-area";
@@ -45,6 +46,7 @@ export const demos: { [name: string]: Demo } = {
   "rhf-select-demo": rhfselect,
   "rhf-otp-demo": rhfotp,
   "rhf-rate-demo": rhfrate,
+  "rhf-sign-demo": rhfsign,
 
   // ui
 } as const;
