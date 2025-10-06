@@ -4,6 +4,7 @@ import { CodeCollapsibleWrapper } from "@/components/registry/code-collapsible-w
 import { CodeTabs } from "@/components/registry/code-tabs";
 import { ComponentPreview } from "@/components/registry/component-preview";
 import { ComponentSource } from "@/components/registry/component-source";
+import { ComponentsList } from "@/components/registry/components-list";
 import { CopyButton } from "@/components/registry/copy-button";
 import { getIconForLanguageExtension } from "@/components/registry/icons";
 import {
@@ -23,7 +24,7 @@ import Link from "next/link";
 import type { MDXComponents } from "mdx/types";
 import type { ImageProps } from "next/image";
 
-export const COMPONENTS: MDXComponents = {
+export const COMPONENTS = {
   h1: ({ className, ...props }: React.ComponentProps<"h1">) => (
     <h1
       className={cn(
@@ -266,7 +267,7 @@ export const COMPONENTS: MDXComponents = {
   Image: ({ src, className, width, height, alt, ...props }: ImageProps) => (
     <Image
       className={cn("mt-6 rounded-md border", className)}
-      src={src}
+      src={src || ""}
       width={Number(width)}
       height={Number(height)}
       alt={alt || ""}
@@ -331,7 +332,7 @@ export const COMPONENTS: MDXComponents = {
   ComponentPreview,
   ComponentSource,
   CodeCollapsibleWrapper,
-  // ComponentsList,
+  ComponentsList,
   Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => (
     <Link
       className={cn("font-medium underline underline-offset-4", className)}
