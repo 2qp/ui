@@ -38,7 +38,7 @@
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
     "vaul": "^1.1.2",
-    "zod": "^4.1.11"
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
@@ -54,12 +54,12 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/jsdom": "^21.1.7",
     "@types/mdx": "^2.0.13",
-    "@types/node": "^24.6.2",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
+    "@types/node": "^24.7.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.1",
     "@vitejs/plugin-react-swc": "^3.11.0",
-    "fumadocs-core": "^15.8.3",
-    "fumadocs-mdx": "^12.0.2",
+    "fumadocs-core": "^15.8.4",
+    "fumadocs-mdx": "^12.0.3",
     "jsdom": "^25.0.1",
     "json5": "^2.2.3",
     "libphonenumber-js": "^1.12.23",
