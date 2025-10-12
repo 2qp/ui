@@ -17,7 +17,7 @@ type ComboBoxItem = {
 type ComboBoxGroup = {
   id: string;
   label?: string;
-  items: ComboBoxItem[];
+  items: ComboBoxItem[] | ReadonlyArray<ComboBoxItem>;
 };
 
 type Indexes = {
