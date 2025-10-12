@@ -194,6 +194,26 @@
       ]
     },
     {
+      "name": "rhf-multi-combo-box",
+      "type": "registry:component",
+      "title": "RHFMultiComboBox",
+      "description": "typed hook forms ready text field",
+      "registryDependencies": [
+        "http://localhost:3000/r/use-multi-combo.json",
+        "command",
+        "dialog",
+        "label",
+        "button",
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "@/components/rhf/rhf-multi-combo-box.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "rhf-phone",
       "type": "registry:component",
       "title": "RHFPhone",
@@ -312,6 +332,19 @@
       ]
     },
     {
+      "name": "use-multi-combo",
+      "type": "registry:file",
+      "title": "use-multi-combo",
+      "description": "",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "@/hooks/use-multi-combo.ts",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "use-phone",
       "type": "registry:file",
       "title": "use-phone",
@@ -413,6 +446,17 @@
       "files": [
         {
           "path": "src/components/rhf-combo-box.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "rhf-multi-combo-box-demo",
+      "type": "registry:example",
+      "registryDependencies": ["input"],
+      "files": [
+        {
+          "path": "src/components/rhf-multi-combo-box.tsx",
           "type": "registry:example"
         }
       ]
